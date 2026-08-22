@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+.godot/
+*.translation
+
+# Build outputs & Mono
+.mono/
+data_*
+*.csproj
+*.sln
+
+# Export files
+*.apk
+*.exe
+*.zip
+export_presets.cfg
+
+# OS generated files
+.DS_Store
+Thumbs.db

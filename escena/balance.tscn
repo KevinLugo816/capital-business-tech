@@ -1,0 +1,138 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxsb4hkohcsjr"]
+
+[ext_resource type="Script" uid="uid://bge5g3oa5elyq" path="res://script/balance.gd" id="1_w6elt"]
+[ext_resource type="Texture2D" uid="uid://bkxkcm2ebuo4e" path="res://sprite/fondos/fondo_recep_noche.png" id="2_v8haf"]
+[ext_resource type="Texture2D" uid="uid://dk63y6ruajevy" path="res://sprite/assets/portapapeles.png" id="3_ouufl"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="4_0q4bo"]
+[ext_resource type="FontFile" uid="uid://c50awhq4ebgoe" path="res://sprite/fuentes/LEMONMILK-Medium.otf" id="4_hs08k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v8haf"]
+texture = ExtResource("3_ouufl")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouufl"]
+bg_color = Color(0, 0, 0, 0.7921569)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hs08k"]
+bg_color = Color(0, 0, 0, 0.58431375)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0q4bo"]
+bg_color = Color(0.31764707, 0.31764707, 0.31764707, 0.9137255)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_foknj"]
+
+[node name="Balance" type="CanvasLayer"]
+script = ExtResource("1_w6elt")
+
+[node name="FondoBal" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_v8haf")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 572.0
+offset_top = 118.0
+offset_right = 1402.0
+offset_bottom = 1020.0
+color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 536.0
+offset_top = 10.0
+offset_right = -488.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_v8haf")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.0
+offset_top = -324.5
+offset_right = 398.0
+offset_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Balance" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.103743516, 0.10374353, 0.103743516, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_0q4bo")
+theme_override_font_sizes/font_size = 42
+text = "REPORTE ECONÓMICO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ingresos" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_0q4bo")
+theme_override_font_sizes/font_size = 40
+text = "Ingresos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gastos" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_0q4bo")
+theme_override_font_sizes/font_size = 40
+text = "Gastos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Neto" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_0q4bo")
+theme_override_font_sizes/font_size = 40
+text = "Neto"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SigDia" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_hs08k")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_ouufl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hs08k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0q4bo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_foknj")
+text = "Continuar"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/SigDia" to="." method="_on_button_siguiente_dia_pressed"]

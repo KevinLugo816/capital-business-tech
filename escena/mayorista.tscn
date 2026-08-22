@@ -1,0 +1,128 @@
+[gd_scene load_steps=9 format=3 uid="uid://brr1n3d1arcan"]
+
+[ext_resource type="Script" uid="uid://de7mke6e0vhpc" path="res://script/mayorista.gd" id="1_usyti"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="2_npui5"]
+[ext_resource type="Theme" uid="uid://bk0b7a5hrocx0" path="res://tema/tema_uno.tres" id="3_dbxoy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aped1"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.92629945, 2.430603e-06, 1.92523e-06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sai6"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.92629945, 2.430603e-06, 1.92523e-06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agixx"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.9998421, 0.30646947, 0.24267942, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_raw71"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgn6a"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.09809854, 0.09809851, 0.09809851, 0.5803922)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5830469, 0.58304703, 0.5830467, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Mayorista" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 95.0
+offset_right = -2.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_usyti")
+
+[node name="MayorCont" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="HeaderBar" type="HBoxContainer" parent="MayorCont"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Label" type="Label" parent="MayorCont/HeaderBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96556026, 0.9409599, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_npui5")
+theme_override_font_sizes/font_size = 38
+text = "Mercado Mayorista"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolverInv" type="Button" parent="MayorCont/HeaderBar"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_npui5")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_aped1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0sai6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_agixx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_raw71")
+text = "Volver al Inventario"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MayorCont"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pgn6a")
+horizontal_scroll_mode = 0
+
+[node name="ListaMayor" type="VBoxContainer" parent="MayorCont/ScrollContainer"]
+layout_mode = 2
+theme = ExtResource("3_dbxoy")
+theme_override_constants/separation = 25

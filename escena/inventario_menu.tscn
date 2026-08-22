@@ -1,0 +1,390 @@
+[gd_scene load_steps=24 format=3 uid="uid://bvpf1jwummjjn"]
+
+[ext_resource type="Script" uid="uid://dtc65jfy5c3ap" path="res://script/inventario_menu.gd" id="1_mxufo"]
+[ext_resource type="Texture2D" uid="uid://ggaseyr2sfkx" path="res://sprite/fondos/fondo_inven.png" id="2_k8rlb"]
+[ext_resource type="Texture2D" uid="uid://8d2tm7si8xus" path="res://sprite/iconos/persona.png" id="3_jwu4a"]
+[ext_resource type="FontFile" uid="uid://c3t87f2g615vn" path="res://sprite/fuentes/LEMONMILK-Regular.otf" id="3_pgn6a"]
+[ext_resource type="PackedScene" uid="uid://brr1n3d1arcan" path="res://escena/mayorista.tscn" id="3_vod83"]
+[ext_resource type="FontFile" uid="uid://bdmgshyg3uadt" path="res://sprite/fuentes/LEMONMILK-MediumItalic.otf" id="5_gsxdt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxufo"]
+bg_color = Color(0, 0, 0, 0.39215687)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wr3k5"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.09809854, 0.09809851, 0.09809851, 0.5803922)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgn6a"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.09809854, 0.09809851, 0.09809851, 0.5803922)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5830469, 0.58304703, 0.5830467, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sai6"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.118736185, 0.30421385, 0.17003852, 0.8980392)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.18039216, 0.8, 0.44313726, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agixx"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2901961, 0.07058824, 0.101960786, 0.8980392)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.90588236, 0.29803923, 0.23529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_raw71"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.47058824, 0.05882353, 0.5529412, 0.8980392)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7672674, 0.23096961, 0.88097554, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncii5"]
+bg_color = Color(0.11870589, 0.35521546, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t26rf"]
+bg_color = Color(0.11764706, 0.35686275, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tnx1"]
+bg_color = Color(0.29894772, 0.51182127, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aped1"]
+bg_color = Color(0.004653281, 0.20243299, 0.8580136, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aped1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsxdt"]
+bg_color = Color(0.0783444, 0.08263784, 0.074051104, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1ot0"]
+bg_color = Color(0.006590693, 0.0071144914, 0.0060900436, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwxv3"]
+bg_color = Color(0.20801246, 0.21558145, 0.20044693, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ncii5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwu4a"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.26666668)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.000113828006, 0.000113828064, 0.00011382786, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vod83"]
+bg_color = Color(0.1681641, 0.71317124, 0.33841628, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="InventarioMenu" type="CanvasLayer"]
+script = ExtResource("1_mxufo")
+
+[node name="Fondo" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -87.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k8rlb")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxufo")
+
+[node name="Titulo" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -420.5
+offset_right = 300.0
+offset_bottom = -359.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_pgn6a")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_wr3k5")
+text = "INVENTARIO Y CONTROL DE PRECIOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventario" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 208.0
+offset_right = -2.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InvenCont" type="VBoxContainer" parent="Panel/Inventario"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="TablaCabecera" type="HBoxContainer" parent="Panel/Inventario/InvenCont"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Inventario/InvenCont"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pgn6a")
+draw_focus_border = true
+horizontal_scroll_mode = 0
+
+[node name="ListaInventario" type="VBoxContainer" parent="Panel/Inventario/InvenCont/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Mayorista" parent="Panel" instance=ExtResource("3_vod83")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.0
+offset_top = -332.0
+offset_right = 283.0
+offset_bottom = 533.0
+
+[node name="Bar" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 805.0
+offset_bottom = 97.0
+theme_override_constants/separation = 40
+
+[node name="LabelDinero" type="Label" parent="Panel/Bar"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.36320707, 0.56433284, 0.1793547, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_0sai6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelInflacion" type="Label" parent="Panel/Bar"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9243957, 0.16768658, 0.25365186, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_agixx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelAlmacen" type="Label" parent="Panel/Bar"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.79878247, 0.27468812, 0.9118876, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_raw71")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonMercado" type="Button" parent="Panel/Bar"]
+custom_minimum_size = Vector2(240, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.9647059, 0.9647059, 0.9647059, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_gsxdt")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_ncii5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_t26rf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1tnx1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_aped1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aped1")
+text = "Mercado"
+
+[node name="BotonCerrar" type="Button" parent="Panel/Bar"]
+custom_minimum_size = Vector2(240, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_gsxdt")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_gsxdt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l1ot0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dwxv3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ncii5")
+text = "Cerrar"
+
+[node name="Alerta" type="PanelContainer" parent="."]
+offset_left = 1625.0
+offset_top = 8.0
+offset_right = 1913.0
+offset_bottom = 100.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Alerta"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="IconoAlerta" type="TextureRect" parent="Alerta/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_jwu4a")
+expand_mode = 3
+
+[node name="LabelTexto" type="Label" parent="Alerta/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_pgn6a")
+theme_override_font_sizes/font_size = 44
+
+[node name="Mini" type="ProgressBar" parent="Alerta/HBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_jwu4a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vod83")
+show_percentage = false
+
+[connection signal="pressed" from="Panel/Bar/BotonCerrar" to="." method="_on_boton_cerrar_pressed"]

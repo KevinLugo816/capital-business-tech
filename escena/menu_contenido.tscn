@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dkca8i11ykkhc"]
+
+[node name="MenuContenido" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BtnRecep" type="Button" parent="."]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 417.0
+offset_right = 549.0
+offset_bottom = 697.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Recepción"
+
+[node name="BtnInventario" type="Button" parent="."]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 74.0
+offset_right = 858.0
+offset_bottom = 354.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Inventario"
+
+[node name="BtnEstadistic" type="Button" parent="."]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 767.0
+offset_right = 856.0
+offset_bottom = 1047.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Estadísticas"
+
+[node name="BtnJugador" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1021.0
+offset_top = 73.0
+offset_right = 1301.0
+offset_bottom = 353.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Jugador"
+
+[node name="BtnMinijuego" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1331.0
+offset_top = 417.0
+offset_right = 1611.0
+offset_bottom = 697.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Minijuegos"
+
+[node name="BtnTutorial" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 766.0
+offset_right = 1305.0
+offset_bottom = 1046.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Tutorial"

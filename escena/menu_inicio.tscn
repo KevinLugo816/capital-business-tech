@@ -1,0 +1,133 @@
+[gd_scene load_steps=3 format=3 uid="uid://6vn828u1vx1u"]
+
+[ext_resource type="Script" uid="uid://dtqk3yvpb53ds" path="res://script/MenuInicio.gd" id="1_0jm6r"]
+[ext_resource type="Texture2D" uid="uid://dlvd0wnlctp2j" path="res://sprite/fondos/Fondo1.png" id="2_sm7oe"]
+
+[node name="MenuInicio" type="CanvasLayer"]
+
+[node name="MenuPrincipal" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.9999995
+offset_right = 228.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.84, 0.84)
+script = ExtResource("1_0jm6r")
+
+[node name="TextureRect" type="TextureRect" parent="MenuPrincipal"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -687.5
+offset_top = -384.0
+offset_right = 687.5
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sm7oe")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPrincipal"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="BtnNuevaPartida" type="Button" parent="MenuPrincipal/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Nueva Partida"
+
+[node name="BtnCargarPartida" type="Button" parent="MenuPrincipal/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Cargar Partida"
+
+[node name="BtnOpciones" type="Button" parent="MenuPrincipal/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Opciones"
+
+[node name="BtnSalir" type="Button" parent="MenuPrincipal/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Salir"
+
+[node name="PopupNombre" type="PopupPanel" parent="MenuPrincipal"]
+oversampling_override = 1.0
+position = Vector2i(450, 260)
+size = Vector2i(238, 117)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPrincipal/PopupNombre"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 234.0
+offset_bottom = 113.0
+
+[node name="Label" type="Label" parent="MenuPrincipal/PopupNombre/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Introduce tu Nombre:"
+
+[node name="InputNombre" type="LineEdit" parent="MenuPrincipal/PopupNombre/VBoxContainer"]
+layout_mode = 2
+max_length = 12
+
+[node name="BtnConfirmarNombre" type="Button" parent="MenuPrincipal/PopupNombre/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Aceptar"
+
+[node name="PopupOpciones" type="PopupPanel" parent="MenuPrincipal"]
+oversampling_override = 1.0
+position = Vector2i(480, 243)
+size = Vector2i(200, 158)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPrincipal/PopupOpciones"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 196.0
+offset_bottom = 154.0
+
+[node name="Label" type="Label" parent="MenuPrincipal/PopupOpciones/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Volumen Musica"
+horizontal_alignment = 1
+
+[node name="SliderMusica" type="HSlider" parent="MenuPrincipal/PopupOpciones/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MenuPrincipal/PopupOpciones/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Volumen Efectos"
+horizontal_alignment = 1
+
+[node name="SliderSFX" type="HSlider" parent="MenuPrincipal/PopupOpciones/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnCerrarOpciones" type="Button" parent="MenuPrincipal/PopupOpciones/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Atrás"
+
+[connection signal="pressed" from="MenuPrincipal/VBoxContainer/BtnNuevaPartida" to="MenuPrincipal" method="_on_btn_nueva_partida_pressed"]
+[connection signal="pressed" from="MenuPrincipal/VBoxContainer/BtnCargarPartida" to="MenuPrincipal" method="_on_btn_cargar_partida_pressed"]
+[connection signal="pressed" from="MenuPrincipal/VBoxContainer/BtnOpciones" to="MenuPrincipal" method="_on_btn_opciones_pressed"]
+[connection signal="pressed" from="MenuPrincipal/VBoxContainer/BtnSalir" to="MenuPrincipal" method="_on_btn_salir_pressed"]
+[connection signal="pressed" from="MenuPrincipal/PopupNombre/VBoxContainer/BtnConfirmarNombre" to="MenuPrincipal" method="_on_btn_confirmar_nombre_pressed"]
+[connection signal="value_changed" from="MenuPrincipal/PopupOpciones/VBoxContainer/SliderMusica" to="MenuPrincipal" method="_on_slider_musica_value_changed"]
+[connection signal="value_changed" from="MenuPrincipal/PopupOpciones/VBoxContainer/SliderSFX" to="MenuPrincipal" method="_on_slider_sfx_value_changed"]
+[connection signal="pressed" from="MenuPrincipal/PopupOpciones/VBoxContainer/BtnCerrarOpciones" to="MenuPrincipal" method="_on_btn_cerrar_opciones_pressed"]

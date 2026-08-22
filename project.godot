@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Capital Business-Tech"
+run/main_scene="uid://6vn828u1vx1u"
+config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0.99705297, 0.99705297, 0.99705297, 1)
+boot_splash/image="uid://h8kqqg4flrou"
+config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
+
+[autoload]
+
+EconomiaGlobal="*res://singleton/EconomiaGlobal.gd"
+Inventario="*res://singleton/Inventario.gd"
+AudioManager="*res://singleton/AudioManager.gd"
+AnimUiManager="*res://singleton/AnimUIManager.gd"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://audio/": "purple",
+"res://escena/": "green",
+"res://script/": "red",
+"res://singleton/": "orange",
+"res://sprite/": "blue",
+"res://tema/": "yellow"
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
