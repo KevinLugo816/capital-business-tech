@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="1_ku8le"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr8of"]
-bg_color = Color(0.79607844, 0, 0, 1)
+bg_color = Color(0.40260392, 0.40260386, 0.40260386, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2

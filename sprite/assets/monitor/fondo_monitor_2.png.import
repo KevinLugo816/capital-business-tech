@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccpv082ppp0q6"
-path="res://.godot/imported/celular_panel.png-28556ca9c2e14cfc77487e6ac1df3475.ctex"
+uid="uid://cp10ngufenbbs"
+path="res://.godot/imported/fondo_monitor_2.png-ba4089494536609ba53c13c2847c0fa4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/assets/celular_panel.png"
-dest_files=["res://.godot/imported/celular_panel.png-28556ca9c2e14cfc77487e6ac1df3475.ctex"]
+source_file="res://sprite/assets/monitor/fondo_monitor_2.png"
+dest_files=["res://.godot/imported/fondo_monitor_2.png-ba4089494536609ba53c13c2847c0fa4.ctex"]
 
 [params]
 

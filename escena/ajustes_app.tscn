@@ -1,0 +1,154 @@
+[gd_scene load_steps=26 format=3 uid="uid://qqeqjach3qdm"]
+
+[ext_resource type="FontFile" uid="uid://do87u0atuuw4r" path="res://sprite/fuentes/control-freak.regular.ttf" id="1_21sdb"]
+[ext_resource type="Script" uid="uid://balyga1mvxo2l" path="res://script/apps/ajustes_app.gd" id="1_761f3"]
+[ext_resource type="Texture2D" uid="uid://dkj0q73hr12ib" path="res://sprite/assets/monitor/fondo_monitor_1.png" id="2_s60u7"]
+[ext_resource type="Texture2D" uid="uid://cp10ngufenbbs" path="res://sprite/assets/monitor/fondo_monitor_2.png" id="3_6onq8"]
+[ext_resource type="Texture2D" uid="uid://d2ocmafgq8jwv" path="res://sprite/assets/monitor/fondo_monitor_3.png" id="4_761f3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s60u7"]
+bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21sdb"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21sdb"]
+texture = ExtResource("2_s60u7")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_761f3"]
+load_path = "res://.godot/imported/fondo_monitor_1.png-9450ba0fc1d9563639b10ca99954d88f.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m5474"]
+texture = SubResource("CompressedTexture2D_761f3")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dyhhv"]
+load_path = "res://.godot/imported/fondo_monitor_1.png-9450ba0fc1d9563639b10ca99954d88f.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u3g82"]
+texture = SubResource("CompressedTexture2D_dyhhv")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5474"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyhhv"]
+texture = ExtResource("3_6onq8")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fah41"]
+load_path = "res://.godot/imported/fondo_monitor_2.png-ba4089494536609ba53c13c2847c0fa4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_545bi"]
+texture = SubResource("CompressedTexture2D_fah41")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fyblq"]
+load_path = "res://.godot/imported/fondo_monitor_2.png-ba4089494536609ba53c13c2847c0fa4.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x032c"]
+texture = SubResource("CompressedTexture2D_fyblq")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u3g82"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fah41"]
+texture = ExtResource("4_761f3")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nohfs"]
+load_path = "res://.godot/imported/fondo_monitor_3.png-be8f5b478d12a650c2cf2fa5e830e490.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qfitl"]
+texture = SubResource("CompressedTexture2D_nohfs")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mtqbr"]
+load_path = "res://.godot/imported/fondo_monitor_3.png-be8f5b478d12a650c2cf2fa5e830e490.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rsm13"]
+texture = SubResource("CompressedTexture2D_mtqbr")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_545bi"]
+
+[node name="AjustesApp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_761f3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s60u7")
+
+[node name="Titulo" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 21.0
+offset_right = 406.0
+offset_bottom = 94.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_21sdb")
+theme_override_font_sizes/font_size = 72
+text = "Configuración"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 19.0
+offset_top = -304.0
+offset_right = 474.0
+offset_bottom = -86.0
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="LabelFondo" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_21sdb")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_21sdb")
+text = "Fondo de Pantalla"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="BtnAzul" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_21sdb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_m5474")
+theme_override_styles/hover = SubResource("StyleBoxTexture_u3g82")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m5474")
+
+[node name="BtnRosa" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_dyhhv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_545bi")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x032c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u3g82")
+
+[node name="BtnVerde" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_fah41")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qfitl")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rsm13")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_545bi")

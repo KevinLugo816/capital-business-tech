@@ -12,7 +12,7 @@ extends Node2D
 const CLIENTE_ESCENA = preload("res://escena/clientes.tscn")
 const INVENTARIO_MENU_ESCENA = preload("res://escena/inventario_menu.tscn")
 const BALANCE_ESCENA = preload("res://escena/balance.tscn")
-const CELULAR_ESCENA = preload("res://escena/celular_virtual.tscn")
+const MONITOR_ESCENA = preload("res://escena/monitor_virtual.tscn")
 
 var clientes_atendidos_hoy: int = 0
 var max_clientes_hoy: int = 5
@@ -20,7 +20,7 @@ var dia_actual: int = 1
 var cliente_actual: Node2D = null
 var datos_venta_actual: Dictionary = {}
 
-var celular_instancia: CanvasLayer = null
+var monitor_instancia: CanvasLayer = null
 
 func _ready() -> void:
 	menu_recepcion.hide()
@@ -83,10 +83,10 @@ func _on_button_aceptar_pressed() -> void:
 		
 		await get_tree().create_timer(2.0).timeout
 		menu_recepcion.hide()
-	
+
 	else:
 		Inventario.modificar_stock(producto, -cantidad)
-		EconomiaGlobal.agregar_dinero(ingreso)
+		EconomiaGlobal.registrar_ingreso_venta(ingreso)
 		AudioManager.reproducir_ingreso()
 		AnimUiManager.animar_dinero(ingreso, label_dinero.global_position + Vector2(10, 20))
 		
@@ -134,7 +134,7 @@ func despachar_cliente() -> void:
 		var balance_instancia = BALANCE_ESCENA.instantiate()
 		balance_instancia.dia_finalizado.connect(_on_nuevo_dia_iniciado)
 		add_child(balance_instancia)
-		balance_instancia.mostrar_balance(dia_actual)
+		balance_instancia.mostrar_balance(dia_actual, clientes_atendidos_hoy, max_clientes_hoy)
 	else:
 		var factor_espera = 1.0 + ((100 - EconomiaGlobal.reputacion) / 20.0)
 		var tiempo_espera = randf_range(1.5, 4.0) * factor_espera
@@ -152,14 +152,14 @@ func _on_cliente_paciencia_agotada(_cliente: Node2D) -> void:
 	AnimUiManager.animar_reputacion(-5, label_reputacion.global_position + Vector2(10, 20))
 	despachar_cliente()
 
-func _on_boton_celular_pressed() -> void:
-	if not is_instance_valid(celular_instancia):
-		celular_instancia = CELULAR_ESCENA.instantiate()
-		add_child(celular_instancia)
+func _on_boton_monitor_pressed() -> void:
+	if not is_instance_valid(monitor_instancia):
+		monitor_instancia = MONITOR_ESCENA.instantiate()
+		add_child(monitor_instancia)
 	else:
-		celular_instancia.visible = !celular_instancia.visible
-		if celular_instancia.visible and celular_instancia.has_method("ir_al_home"):
-			celular_instancia.ir_al_home()
+		monitor_instancia.show()
+		if monitor_instancia.has_method("ir_al_home"):
+			monitor_instancia.ir_al_home()
 
 func _on_boton_inventario_pressed() -> void:
 	var inv_instancia = INVENTARIO_MENU_ESCENA.instantiate()
@@ -182,9 +182,9 @@ func _actualizar_label_reputacion(nueva_rep: int) -> void:
 	label_reputacion.text = "Fama: " + str(nueva_rep) + "%"
 
 func _on_nuevo_dia_iniciado() -> void:
-	if is_instance_valid(celular_instancia):
-		celular_instancia.queue_free()
-		celular_instancia = null
+	if is_instance_valid(monitor_instancia):
+		monitor_instancia.queue_free()
+		monitor_instancia = null
 
 	for hijo in get_children():
 		if hijo.has_signal("dia_finalizado") or hijo.has_method("mostrar_balance"):

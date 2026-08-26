@@ -8,7 +8,7 @@ signal nuevo_dia_comenzado
 # --- LÓGICA DEL DINERO ---
 var dinero: float = 500.0 : 
 	set(valor):
-		dinero = max(0.0, valor)
+		dinero = valor
 		dinero_cambiado.emit(dinero)
 
 # --- LÓGICA DE INFLACIÓN ---
@@ -43,6 +43,7 @@ var tasa_iva: float = 0.16
 var iva_acumulado_hoy: float = 0.0
 
 # --- OFERTA DIARIA DEL MAYORISTA ---
+var gastos_mayorista_hoy: float = 0.0
 var producto_en_oferta: String = ""
 const PORCENTAJE_OFERTA: float = 0.25
 
@@ -63,9 +64,16 @@ func restar_dinero(monto: float) -> bool:
 		return true
 	return false
 
+func aplicar_cobro_forzoso(monto: float) -> void:
+	dinero -= monto
+
 # --- MÉTODOS DE SIMULACIÓN Y JORNADA ---
 func simular_inflacion_diaria() -> void:
 	tasa_inflacion += randf_range(-0.02, 0.05)
+
+func registrar_ingreso_venta(monto: float) -> void:
+	ingresos_del_dia += monto
+	agregar_dinero(monto)
 
 func aplicar_intereses_deuda() -> void:
 	if deuda_actual > 0:
@@ -84,6 +92,39 @@ func generar_oferta_del_dia() -> void:
 func iniciar_nuevo_dia() -> void:
 	ingresos_del_dia = 0.0
 	gastos_del_dia = 0.0
+	gastos_mayorista_hoy = 0.0
 	limpiar_impuestos_diarios()
 	generar_oferta_del_dia()
 	nuevo_dia_comenzado.emit()
+
+func procesar_cierre_diario(dia_actual: int) -> Dictionary:
+	var ingresos = ingresos_del_dia
+	var impuestos_a_pagar = iva_acumulado_hoy
+	
+	var servicios_inflados = costo_base_servicios * (1.0 + tasa_inflacion)
+	var alquiler_inflado = 0.0
+	if dia_actual % 5 == 0:
+		alquiler_inflado = costo_base_alquiler * (1.0 + tasa_inflacion)
+	
+	var costos_fijos = servicios_inflados + alquiler_inflado
+	
+	var intereses_hoy = 0.0
+	if deuda_actual > 0:
+		var deuda_previa = deuda_actual
+		aplicar_intereses_deuda()
+		intereses_hoy = deuda_actual - deuda_previa
+		
+	aplicar_cobro_forzoso(costos_fijos + impuestos_a_pagar)
+	
+	var total_gastos = costos_fijos + impuestos_a_pagar
+	gastos_del_dia = total_gastos
+	var utilidad_neta = ingresos - total_gastos - intereses_hoy
+	
+	return {
+		"ingresos": ingresos,
+		"costos_fijos": costos_fijos,
+		"impuestos": impuestos_a_pagar,
+		"intereses": intereses_hoy,
+		"total_gastos": total_gastos,
+		"utilidad_neta": utilidad_neta
+	}

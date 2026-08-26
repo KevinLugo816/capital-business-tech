@@ -1,66 +1,84 @@
 extends CanvasLayer
 
-@onready var titulo_balance = $Panel/MarginContainer/VBoxContainer/Balance
-@onready var label_ingresos = $Panel/MarginContainer/VBoxContainer/Ingresos
-@onready var label_gastos = $Panel/MarginContainer/VBoxContainer/Gastos
-@onready var label_neto = $Panel/MarginContainer/VBoxContainer/Neto
-
 signal dia_finalizado
 
-func _ready() -> void:
-	var tamaño_fuente_grande = 32
-	titulo_balance.add_theme_font_size_override("font_size", 40)
-	label_ingresos.add_theme_font_size_override("font_size", tamaño_fuente_grande)
-	label_gastos.add_theme_font_size_override("font_size", tamaño_fuente_grande)
-	label_neto.add_theme_font_size_override("font_size", tamaño_fuente_grande)
+@onready var titulo_balance = $Panel/MarginContainer/VBoxContainer/Balance
+@onready var label_resumen_clientes = $Panel/MarginContainer/VBoxContainer/Clientes
+@onready var label_ingresos = $Panel/MarginContainer/VBoxContainer/Ingresos
+@onready var label_gastos_fijos = $Panel/MarginContainer/VBoxContainer/Gastos
+@onready var label_impuestos = $Panel/MarginContainer/VBoxContainer/Impuestos
+@onready var label_compras_mayorista = $Panel/MarginContainer/VBoxContainer/Compras
+@onready var label_intereses = $Panel/MarginContainer/VBoxContainer/Intereses
+@onready var label_deuda = $Panel/MarginContainer/VBoxContainer/EstadoDeuda
+@onready var label_reputacion_fin = $Panel/MarginContainer/VBoxContainer/Reputacion
+@onready var label_neto = $Panel/MarginContainer/VBoxContainer/Neto
+@onready var label_alerta_sobregiro = $Panel/MarginContainer/VBoxContainer/Alertas
 
-func mostrar_balance(dia_actual: int) -> void:
-	titulo_balance.text = "REPORTE ECONÓMICO - DÍA " + str(dia_actual)
+func _ready() -> void:
+	_configurar_estilos_texto()
+
+func _configurar_estilos_texto() -> void:
+	var tamano_fuente = 32
+	var tamano_titulo = 40
 	
-	var ingresos = EconomiaGlobal.ingresos_del_dia
-	var inflacion = EconomiaGlobal.tasa_inflacion
-	var impuestos_a_pagar = EconomiaGlobal.iva_acumulado_hoy
+	titulo_balance.add_theme_font_size_override("font_size", tamano_titulo)
 	
-	var servicios_inflados = EconomiaGlobal.costo_base_servicios * (1.0 + inflacion)
-	var alquiler_inflado = 0.0
-	var es_dia_de_alquiler = (dia_actual % 5 == 0)
+	for child in $Panel/MarginContainer/VBoxContainer.get_children():
+		if child != titulo_balance and child != label_neto:
+			if child is Label:
+				child.add_theme_font_size_override("font_size", tamano_fuente)
+			elif child is RichTextLabel:
+				child.add_theme_font_size_override("normal_font_size", tamano_fuente)
+			
+	label_neto.add_theme_font_size_override("font_size", 32)
+
+func mostrar_balance(dia_actual: int, clientes_atendidos: int, max_clientes: int) -> void:
+	titulo_balance.text = "REPORTE ECONÓMICO - DÍA %d" % dia_actual
 	
-	if es_dia_de_alquiler:
-		alquiler_inflado = EconomiaGlobal.costo_base_alquiler * (1.0 + inflacion)
+	var reporte = EconomiaGlobal.procesar_cierre_diario(dia_actual)
 	
-	var intereses_banco_hoy = 0.0
-	if EconomiaGlobal.deuda_actual > 0:
-		var deuda_previa = EconomiaGlobal.deuda_actual
-		EconomiaGlobal.aplicar_intereses_deuda()
-		intereses_banco_hoy = EconomiaGlobal.deuda_actual - deuda_previa
+	label_resumen_clientes.text = "Clientes Atendidos: %d / %d" % [clientes_atendidos, max_clientes]
+	label_reputacion_fin.text = "• Fama Comercial Actual: %d%%" % EconomiaGlobal.reputacion
 	
-	var costos_locales = servicios_inflados + alquiler_inflado
-	EconomiaGlobal.restar_dinero(costos_locales)
+	label_ingresos.text = "• Ingresos Brutos (Ventas + IVA): [color=#2ecc71]+$%s[/color]" % _f(reporte.ingresos)
 	
-	EconomiaGlobal.restar_dinero(impuestos_a_pagar)
+	label_gastos_fijos.text = "• Costos Fijos (Servicios/Alquiler): [color=#e74c3c]-$%s[/color]" % _f(reporte.costos_fijos)
+	label_impuestos.text = "• IVA Acumulado a Declarar: [color=#e74c3c]-$%s[/color]" % _f(reporte.impuestos)
+	label_compras_mayorista.text = "• Inversión Mercado Mayorista: [color=#e74c3c]-$%s[/color]" % _f(EconomiaGlobal.gastos_mayorista_hoy)
 	
-	var total_gastos = costos_locales + impuestos_a_pagar
-	EconomiaGlobal.gastos_del_dia = total_gastos
-	
-	var utilidad_neta = ingresos - total_gastos - intereses_banco_hoy
-	
-	label_ingresos.text = "Ingresos Brutos + IVA: +$" + str(snapped(ingresos, 0.01))
-	
-	label_gastos.text = "Gastos Fijos: -$" + str(snapped(costos_locales, 0.01))
-	label_gastos.text += " | IVA Declarado: -$" + str(snapped(impuestos_a_pagar, 0.01))
-	if intereses_banco_hoy > 0:
-		label_gastos.text += " | Intereses: -$" + str(snapped(intereses_banco_hoy, 0.01))
-	
-	if utilidad_neta >= 0:
-		label_neto.text = "Utilidad Neta: +$" + str(snapped(utilidad_neta, 0.01)) + " (SUPERÁVIT)"
-		label_neto.add_theme_color_override("font_color", Color.DARK_GREEN)
+	if reporte.intereses > 0:
+		label_intereses.show()
+		label_intereses.text = "• Intereses Bancarios por Deuda: [color=#e74c3c]-$%s[/color]" % _f(reporte.intereses)
 	else:
-		label_neto.text = "Balance del Día: -$" + str(snapped(abs(utilidad_neta), 0.01)) + " (DÉFICIT)"
-		label_neto.add_theme_color_override("font_color", Color.DARK_RED)
+		label_intereses.hide()
 	
+	if EconomiaGlobal.deuda_actual > 0:
+		label_deuda.show()
+		label_deuda.text = "• Deuda Pendiente con el Banco: [color=#e67e22]$%s[/color]" % _f(EconomiaGlobal.deuda_actual)
+	else:
+		label_deuda.hide()
+		
+	var utilidad = reporte.utilidad_neta - EconomiaGlobal.gastos_mayorista_hoy
+	
+	if utilidad >= 0:
+		label_neto.text = "UTILIDAD NETA: +$%s (SUPERÁVIT)" % _f(utilidad)
+		label_neto.add_theme_color_override("font_color", Color("2ecc71"))
+	else:
+		label_neto.text = "RESULTADO NETO: -$%s (DÉFICIT)" % _f(abs(utilidad))
+		label_neto.add_theme_color_override("font_color", Color("e74c3c"))
+
+	if EconomiaGlobal.dinero <= 0.0:
+		label_alerta_sobregiro.show()
+		label_alerta_sobregiro.text = "¡ALERTA: CUENTA EN SOBREGIRO ($%s)!" % _f(EconomiaGlobal.dinero)
+		label_alerta_sobregiro.add_theme_color_override("font_color", Color("af1f12ff"))
+	else:
+		label_alerta_sobregiro.hide()
+
 	show()
+
+func _f(monto: float) -> String:
+	return str(snapped(monto, 0.01))
 
 func _on_button_siguiente_dia_pressed() -> void:
 	hide()
-	EconomiaGlobal.iniciar_nuevo_dia()
 	dia_finalizado.emit()

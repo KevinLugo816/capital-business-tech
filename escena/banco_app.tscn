@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8guv4hklfrt8"]
+
+[ext_resource type="Script" uid="uid://71h1dwvwkcc4" path="res://script/apps/banco_app.gd" id="1_0h7nq"]
+
+[node name="BancoPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0h7nq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelDeuda" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelEstado" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnSolicitar" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "Solicitar Crédito ($100)"
+
+[node name="BtnPagar" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "Pagar Deuda ($50)"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BtnSolicitar" to="." method="_on_btn_solicitar_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BtnPagar" to="." method="_on_btn_pagar_pressed"]

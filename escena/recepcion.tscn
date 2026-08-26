@@ -367,7 +367,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_l5kyc")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_x571o")
 text = "X"
 
-[node name="BotonCelular" type="Button" parent="UI"]
+[node name="BotonMonitor" type="Button" parent="UI"]
 offset_left = -2.0
 offset_top = 977.0
 offset_right = 264.0
@@ -380,7 +380,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_4651x")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6rlgg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gdhd4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qjd7c")
-text = "Internet"
+text = "Monitor"
 
 [node name="BotonInventario" type="Button" parent="UI"]
 offset_left = 1657.0
@@ -399,5 +399,5 @@ text = "Inventario"
 
 [connection signal="pressed" from="UI/Menu/PanelDialogo/ButtonV" to="." method="_on_button_aceptar_pressed"]
 [connection signal="pressed" from="UI/Menu/PanelDialogo/ButtonX" to="." method="_on_button_rechazar_pressed"]
-[connection signal="pressed" from="UI/BotonCelular" to="." method="_on_boton_celular_pressed"]
+[connection signal="pressed" from="UI/BotonMonitor" to="." method="_on_boton_monitor_pressed"]
 [connection signal="pressed" from="UI/BotonInventario" to="." method="_on_boton_inventario_pressed"]

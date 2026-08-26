@@ -93,23 +93,107 @@ text = "REPORTE ECONÓMICO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ingresos" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Clientes" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("4_0q4bo")
 theme_override_font_sizes/font_size = 40
-text = "Ingresos"
+text = "Clientes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gastos" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Ingresos" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("4_0q4bo")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Ingresos"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gastos" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("4_0q4bo")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Gastos"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Impuestos" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("4_0q4bo")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Impuestos"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Compras" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("4_0q4bo")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Compras"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Intereses" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("4_0q4bo")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Intereses"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EstadoDeuda" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/normal_font = ExtResource("4_0q4bo")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Deudas"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reputacion" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("4_0q4bo")
 theme_override_font_sizes/font_size = 40
-text = "Gastos"
+text = "Reputacion"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -120,6 +204,16 @@ theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("4_0q4bo")
 theme_override_font_sizes/font_size = 40
 text = "Neto"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Alertas" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_0q4bo")
+theme_override_font_sizes/font_size = 40
+text = "Alertas"
 horizontal_alignment = 1
 vertical_alignment = 1
 

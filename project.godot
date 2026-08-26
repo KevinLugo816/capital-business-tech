@@ -22,6 +22,7 @@ boot_splash/minimum_display_time=2000
 
 EconomiaGlobal="*res://singleton/EconomiaGlobal.gd"
 Inventario="*res://singleton/Inventario.gd"
+ConfigUsuario="*res://singleton/ConfigUsuario.gd"
 AudioManager="*res://singleton/AudioManager.gd"
 AnimUiManager="*res://singleton/AnimUIManager.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"

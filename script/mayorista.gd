@@ -184,6 +184,7 @@ func procesar_compra(producto: String, costo_unitario: float, cantidad: int) -> 
 
 	if EconomiaGlobal.restar_dinero(costo_total):
 		Inventario.modificar_stock(producto, cantidad)
+		EconomiaGlobal.gastos_mayorista_hoy += costo_total
 		actualizar_catalogo()
 		compra_realizada.emit()
 	else:

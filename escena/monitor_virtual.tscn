@@ -1,0 +1,262 @@
+[gd_scene load_steps=30 format=3 uid="uid://6rvlernomhpu"]
+
+[ext_resource type="Script" uid="uid://0qtj2frih7mk" path="res://script/monitor_virtual.gd" id="1_5epki"]
+[ext_resource type="Texture2D" uid="uid://byfx153lkvyto" path="res://sprite/assets/monitor.png" id="2_hhjmg"]
+[ext_resource type="Texture2D" uid="uid://dkj0q73hr12ib" path="res://sprite/assets/monitor/fondo_monitor_1.png" id="3_ndgsr"]
+[ext_resource type="FontFile" uid="uid://do87u0atuuw4r" path="res://sprite/fuentes/control-freak.regular.ttf" id="4_r211a"]
+[ext_resource type="FontFile" uid="uid://6rslwvfssykx" path="res://sprite/fuentes/Neuropol.otf" id="4_tlwlu"]
+[ext_resource type="Texture2D" uid="uid://rpqyu3uglcv3" path="res://sprite/assets/icono_banco.png" id="5_tlwlu"]
+[ext_resource type="PackedScene" uid="uid://bc3760oght6lt" path="res://escena/publicidad_app.tscn" id="6_5epki"]
+[ext_resource type="Texture2D" uid="uid://c8cggs78da1nc" path="res://sprite/assets/icono_noticias.png" id="6_a8bi5"]
+[ext_resource type="PackedScene" uid="uid://c8guv4hklfrt8" path="res://escena/banco_app.tscn" id="6_hhjmg"]
+[ext_resource type="PackedScene" uid="uid://3omew5yvc4t" path="res://escena/noticias_app.tscn" id="7_ndgsr"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="11_a8bi5"]
+[ext_resource type="PackedScene" uid="uid://qqeqjach3qdm" path="res://escena/ajustes_app.tscn" id="11_gbdga"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndgsr"]
+texture = ExtResource("2_hhjmg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r211a"]
+bg_color = Color(0, 0, 0, 0.39215687)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvtgf"]
+texture = ExtResource("5_tlwlu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gt7q2"]
+texture = ExtResource("5_tlwlu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ml5n"]
+texture = ExtResource("5_tlwlu")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t8tug"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t8tug"]
+texture = ExtResource("6_a8bi5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5fmij"]
+texture = ExtResource("6_a8bi5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oweso"]
+texture = ExtResource("6_a8bi5")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v65a4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gbdga"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pp344"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ndgsr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r211a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tlwlu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8bi5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcw83"]
+
+[node name="MonitorVirtual" type="CanvasLayer"]
+script = ExtResource("1_5epki")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ndgsr")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 53.0
+offset_right = 1867.0
+offset_bottom = 993.0
+texture = ExtResource("3_ndgsr")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 57.0
+offset_top = 53.0
+offset_right = -53.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/Control"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 92.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r211a")
+
+[node name="Topbar" type="HBoxContainer" parent="Panel/Control/PanelContainer"]
+custom_minimum_size = Vector2(1790, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 60
+
+[node name="Sistema" type="Label" parent="Panel/Control/PanelContainer/Topbar"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_tlwlu")
+theme_override_font_sizes/font_size = 50
+text = "KevOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separador" type="Control" parent="Panel/Control/PanelContainer/Topbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelDinero" type="Label" parent="Panel/Control/PanelContainer/Topbar"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_r211a")
+theme_override_font_sizes/font_size = 54
+text = "$500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelInflacion" type="Label" parent="Panel/Control/PanelContainer/Topbar"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_r211a")
+theme_override_font_sizes/font_size = 54
+text = "%0.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelDia" type="Label" parent="Panel/Control/PanelContainer/Topbar"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_r211a")
+theme_override_font_sizes/font_size = 54
+text = "Día: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Control"]
+layout_mode = 0
+offset_right = 1810.0
+offset_bottom = 940.0
+alignment = 1
+
+[node name="Principal" type="MarginContainer" parent="Panel/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HomeMenu" type="GridContainer" parent="Panel/Control/VBoxContainer/Principal"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 40
+columns = 4
+
+[node name="Banco" type="Button" parent="Panel/Control/VBoxContainer/Principal/HomeMenu"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_xvtgf")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gt7q2")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4ml5n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t8tug")
+
+[node name="Noticias" type="Button" parent="Panel/Control/VBoxContainer/Principal/HomeMenu"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_t8tug")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5fmij")
+theme_override_styles/hover = SubResource("StyleBoxTexture_oweso")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v65a4")
+
+[node name="Publicidad" type="Button" parent="Panel/Control/VBoxContainer/Principal/HomeMenu"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gbdga")
+text = "Publicidad"
+
+[node name="Ajustes" type="Button" parent="Panel/Control/VBoxContainer/Principal/HomeMenu"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pp344")
+text = "Configuración"
+
+[node name="BancoApp" parent="Panel/Control/VBoxContainer/Principal" instance=ExtResource("6_hhjmg")]
+visible = false
+layout_mode = 2
+
+[node name="NoticiasApp" parent="Panel/Control/VBoxContainer/Principal" instance=ExtResource("7_ndgsr")]
+visible = false
+layout_mode = 2
+
+[node name="PublicidadApp" parent="Panel/Control/VBoxContainer/Principal" instance=ExtResource("6_5epki")]
+visible = false
+layout_mode = 2
+
+[node name="AjustesApp" parent="Panel/Control/VBoxContainer/Principal" instance=ExtResource("11_gbdga")]
+visible = false
+layout_mode = 2
+
+[node name="BotonCerrar" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ndgsr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r211a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tlwlu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a8bi5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wcw83")
+
+[node name="Info" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 1003.0
+offset_right = 917.0
+offset_bottom = 1074.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("11_a8bi5")
+theme_override_font_sizes/font_size = 24
+text = "Presiona aquí para Cerrar/Volver >"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/Control/VBoxContainer/Principal/HomeMenu/Banco" to="." method="_on_btn_app_banco_pressed"]
+[connection signal="pressed" from="Panel/Control/VBoxContainer/Principal/HomeMenu/Noticias" to="." method="_on_btn_app_noticias_pressed"]
+[connection signal="pressed" from="Panel/Control/VBoxContainer/Principal/HomeMenu/Publicidad" to="." method="_on_btn_app_publicidad_pressed"]
+[connection signal="pressed" from="Panel/Control/VBoxContainer/Principal/HomeMenu/Ajustes" to="." method="_on_btn_app_ajustes_pressed"]
+[connection signal="pressed" from="Panel/BotonCerrar" to="." method="_on_boton_cerrar_pressed"]
