@@ -1,28 +1,189 @@
-[gd_scene format=3 uid="uid://3omew5yvc4t"]
+[gd_scene load_steps=8 format=3 uid="uid://3omew5yvc4t"]
 
-[node name="NoticiasPanel" type="Control"]
+[ext_resource type="FontFile" uid="uid://d1g3voa1c6gdp" path="res://sprite/fuentes/LEMONMILK-Bold.otf" id="1_3vu5n"]
+[ext_resource type="Script" uid="uid://56yd8wi1d8j2" path="res://script/apps/noticias_app.gd" id="1_yot51"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="2_omf62"]
+[ext_resource type="Script" uid="uid://c6inh7rvslalc" path="res://script/apps/grafica_inflacion.gd" id="4_5ubef"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3vu5n"]
+grow_begin = -20.0
+grow_end = -20.0
+thickness = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omf62"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.8474744, 0.84747446, 0.8474743, 0.85882354)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yot51"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.23213834, 0.24143237, 0.33872926, 0.85882354)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.6530239e-05, 1.653022e-05, 1.65302e-05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[node name="NoticiasApp" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_yot51")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.87977564, 0.87977576, 0.8797757, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="VBoxCabecera" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.106481485
+anchor_right = 1.0
+anchor_bottom = 0.2
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="LabelNoticia" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Cabecera" type="MarginContainer" parent="VBoxCabecera"]
 layout_mode = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 40
+
+[node name="LabelTitulo" type="Label" parent="VBoxCabecera/Cabecera"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.10243831, 0.15678173, 0.82083505, 1)
+theme_override_fonts/font = ExtResource("1_3vu5n")
+theme_override_font_sizes/font_size = 52
+text = "+--- NOTICIAS ECONÓMICAS ---+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxCabecera"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_3vu5n")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013541667
+anchor_top = 0.2175926
+anchor_right = 0.4606771
+anchor_bottom = 0.98333335
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_omf62")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxNoticia" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureIcono" type="TextureRect" parent="PanelContainer/VBoxNoticia"]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+
+[node name="LabelNoticia" type="Label" parent="PanelContainer/VBoxNoticia"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_omf62")
+theme_override_font_sizes/font_size = 52
+text = "Titular principal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Detalles" type="RichTextLabel" parent="PanelContainer/VBoxNoticia"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101867564, 0.10186755, 0.10186755, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/normal_font_size = 38
+theme_override_font_sizes/bold_font_size = 38
+bbcode_enabled = true
+text = "Texto del titular"
+fit_content = true
+vertical_alignment = 1
+
+[node name="VBoxOtros" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49583334
+anchor_top = 0.6212963
+anchor_right = 0.9703125
+anchor_bottom = 0.9777778
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Otros" type="RichTextLabel" parent="VBoxOtros"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.101867564, 0.10186755, 0.10186755, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/normal_font_size = 35
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "Otras noticias aquí"
+fit_content = true
+vertical_alignment = 1
+
+[node name="LabelInfl" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49739584
+anchor_top = 0.20648149
+anchor_right = 0.7104167
+anchor_bottom = 0.26018518
+theme_override_colors/font_color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_omf62")
+theme_override_font_sizes/font_size = 48
+text = "Historial Inflacionario"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(920, 320)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.496875
+anchor_top = 0.28148147
+anchor_right = 0.9760417
+anchor_bottom = 0.5777778
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yot51")
+metadata/_edit_use_anchors_ = true
+
+[node name="GraficaInflacion" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_5ubef")

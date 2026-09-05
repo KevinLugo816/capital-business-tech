@@ -1,8 +1,293 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8guv4hklfrt8"]
+[gd_scene load_steps=26 format=3 uid="uid://c8guv4hklfrt8"]
 
 [ext_resource type="Script" uid="uid://71h1dwvwkcc4" path="res://script/apps/banco_app.gd" id="1_0h7nq"]
+[ext_resource type="Texture2D" uid="uid://ck3hvyyoiiad1" path="res://sprite/assets/monitor/fondo_banco_app.png" id="2_d5t5j"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="3_1055q"]
 
-[node name="BancoPanel" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_beog8"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.101867564, 0.10186755, 0.10186755, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.14044741, 0.14044747, 0.14044735, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdpbo"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.101867564, 0.10186755, 0.10186755, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.14044741, 0.14044747, 0.14044735, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_difwh"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.101867564, 0.10186755, 0.10186755, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.14044741, 0.14044747, 0.14044735, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_size = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1055q"]
+color = Color(0.72488725, 0.70688784, 0.68804765, 1)
+grow_begin = -12.0
+grow_end = -12.0
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1055q"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.06953164, 0.44981146, 0.34484193, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx6hi"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.071738966, 0.45251954, 0.3461319, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri8ku"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.10104694, 0.59550047, 0.45889908, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fx6hi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6enl4"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.06953164, 0.44981146, 0.34484193, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aynir"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.071738966, 0.45251954, 0.3461319, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmx20"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.10104694, 0.59550047, 0.45889908, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_beog8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcfed"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.66239053, 0.19394317, 0.17203468, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlnea"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.49141872, 0.13002661, 0.11571135, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn0b0"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.89885336, 0.3377874, 0.30205548, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8daix"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.3254902, 0.32941177, 0.33333334, 0.627451)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7122j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7122j"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.66239053, 0.19394317, 0.17203468, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vnli5"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.49141872, 0.13002661, 0.11571135, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncgqu"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.89885336, 0.3377874, 0.30205548, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1w4v"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.3254902, 0.32941177, 0.33333334, 0.627451)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6enl4"]
+
+[node name="BancoApp" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,45 +296,163 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0h7nq")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Fondo" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_d5t5j")
+expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 135.0
+offset_right = 508.0
+offset_bottom = 385.0
+theme_override_constants/separation = 30
+
+[node name="LabelDeuda" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 1
+theme_override_colors/font_color = Color(0.92636144, 0.2000306, 0.21345684, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_beog8")
+text = "Deuda Bancaria"
+vertical_alignment = 1
 
-[node name="LabelDeuda" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="LabelEstado" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9254902, 0.2, 0.21176471, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_xdpbo")
+text = "Estado Cuenta"
+vertical_alignment = 1
+
+[node name="LabelTasaInteres" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9254902, 0.2, 0.21176471, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_difwh")
+text = "Tasa de Interés"
+vertical_alignment = 1
+
+[node name="LabelScore" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9254902, 0.2, 0.21176471, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_difwh")
+text = "Score Crediticio"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxLine_1055q")
+
+[node name="HBoxMonto" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LabelMonto" type="Label" parent="VBoxContainer/HBoxMonto"]
 layout_mode = 2
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 44
+text = "Monto: $"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LabelEstado" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Monto" type="SpinBox" parent="VBoxContainer/HBoxMonto"]
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+min_value = 10.0
+max_value = 10000.0
+step = 10.0
+value = 10.0
+
+[node name="BtnMaxSolicitar" type="Button" parent="VBoxContainer/HBoxMonto"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_1055q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fx6hi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ri8ku")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fx6hi")
+text = "Max Prest."
+
+[node name="BtnMaxPagar" type="Button" parent="VBoxContainer/HBoxMonto"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_6enl4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aynir")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tmx20")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_beog8")
+text = "Max Pago"
+
+[node name="HBoxAcciones" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BtnSolicitar" type="Button" parent="VBoxContainer/HBoxAcciones"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_jcfed")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mlnea")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jn0b0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8daix")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7122j")
+text = "Solicitar Crédito"
+
+[node name="BtnPagar" type="Button" parent="VBoxContainer/HBoxAcciones"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_7122j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vnli5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ncgqu")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_v1w4v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6enl4")
+text = "Pagar Deuda"
+
+[node name="LabelMensaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -100.0
+offset_right = 86.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_1055q")
+theme_override_font_sizes/font_size = 54
+text = "Mensaje"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BtnSolicitar" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
-text = "Solicitar Crédito ($100)"
-
-[node name="BtnPagar" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
-text = "Pagar Deuda ($50)"
-
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BtnSolicitar" to="." method="_on_btn_solicitar_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BtnPagar" to="." method="_on_btn_pagar_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxAcciones/BtnSolicitar" to="." method="_on_btn_solicitar_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxAcciones/BtnPagar" to="." method="_on_btn_pagar_pressed"]

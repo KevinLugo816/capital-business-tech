@@ -1,8 +1,72 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc3760oght6lt"]
+[gd_scene load_steps=10 format=3 uid="uid://bc3760oght6lt"]
 
 [ext_resource type="Script" uid="uid://crjvpspqwbh26" path="res://script/apps/publicidad_app.gd" id="1_lum5k"]
+[ext_resource type="FontFile" uid="uid://c50awhq4ebgoe" path="res://sprite/fuentes/LEMONMILK-Medium.otf" id="2_1ohbx"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="3_bs0ky"]
+[ext_resource type="FontFile" uid="uid://c3t87f2g615vn" path="res://sprite/fuentes/LEMONMILK-Regular.otf" id="4_hpuv2"]
+[ext_resource type="Theme" uid="uid://bk0b7a5hrocx0" path="res://tema/tema_uno.tres" id="5_g6phm"]
 
-[node name="PublicidadPanel" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs0ky"]
+bg_color = Color(0.3882353, 0.19215687, 0.4745098, 0.84313726)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6phm"]
+content_margin_left = 8.0
+content_margin_top = 16.0
+content_margin_right = 8.0
+content_margin_bottom = 16.0
+bg_color = Color(0.3695989, 0.6877508, 0.34949332, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqhx0"]
+content_margin_left = 8.0
+content_margin_top = 16.0
+content_margin_right = 8.0
+content_margin_bottom = 16.0
+bg_color = Color(0.86534315, 0.49205893, 0.07370805, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ansq"]
+content_margin_left = 8.0
+content_margin_top = 16.0
+content_margin_right = 8.0
+content_margin_bottom = 16.0
+bg_color = Color(0.93588376, 0.16828233, 0.5140029, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[node name="PublicidadApp" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,20 +74,220 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lum5k")
+metadata/_edit_use_anchors_ = true
 
-[node name="BtnLanzar" type="Button" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = -136.5
-offset_right = 148.0
-offset_bottom = 136.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Lanzar Campaña ($50)"
+color = Color(0.4428079, 0.19140476, 0.6057506, 1)
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="BtnLanzar" to="." method="_on_btn_campana_pressed"]
+[node name="Header" type="PanelContainer" parent="."]
+layout_mode = 0
+anchor_top = 0.11574074
+anchor_right = 1.0
+anchor_bottom = 0.32592592
+theme_override_styles/panel = SubResource("StyleBoxFlat_bs0ky")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Header"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LabelTitulo" type="Label" parent="Header/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_1ohbx")
+theme_override_font_sizes/font_size = 44
+text = "AGENCIA DE MARKETING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelReputacion" type="Label" parent="Header/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_bs0ky")
+theme_override_font_sizes/font_size = 40
+text = "Reputación: 50/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelEstado" type="RichTextLabel" parent="Header/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("3_bs0ky")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Agencia disponible..."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(1800, 400)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03125
+anchor_top = 0.4712963
+anchor_right = 0.96875
+anchor_bottom = 0.84166664
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Campanas" type="HBoxContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="CardVolantes" type="PanelContainer" parent="Scroll/Campanas"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6phm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/Campanas/CardVolantes"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="Scroll/Campanas/CardVolantes/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_hpuv2")
+theme_override_font_sizes/font_size = 34
+text = "Reparto de Volantes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descripcion" type="RichTextLabel" parent="Scroll/Campanas/CardVolantes/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("3_bs0ky")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "Publicidad local de bajo costo. Atrae a pocos clientes de la zona.
+[color=#2ecc71]+10 Reputación[/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Costo" type="Label" parent="Scroll/Campanas/CardVolantes/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_bs0ky")
+theme_override_font_sizes/font_size = 40
+text = "Costo: $30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnContratar" type="Button" parent="Scroll/Campanas/CardVolantes/VBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_g6phm")
+theme_override_font_sizes/font_size = 36
+text = "Contratar"
+
+[node name="CardRedes" type="PanelContainer" parent="Scroll/Campanas"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_cqhx0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/Campanas/CardRedes"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="Scroll/Campanas/CardRedes/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_hpuv2")
+theme_override_font_sizes/font_size = 34
+text = "Anuncios en Redes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descripcion" type="RichTextLabel" parent="Scroll/Campanas/CardRedes/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("3_bs0ky")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "Campaña digital dirigida. Gran impulso de visibilidad local.
+[color=#2ecc71]+25 Reputación[/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Costo" type="Label" parent="Scroll/Campanas/CardRedes/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_bs0ky")
+theme_override_font_sizes/font_size = 40
+text = "Costo: $80"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnContratar" type="Button" parent="Scroll/Campanas/CardRedes/VBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_g6phm")
+theme_override_font_sizes/font_size = 36
+text = "Contratar"
+
+[node name="CardValla" type="PanelContainer" parent="Scroll/Campanas"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ansq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/Campanas/CardValla"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titulo" type="Label" parent="Scroll/Campanas/CardValla/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_hpuv2")
+theme_override_font_sizes/font_size = 34
+text = "Valla Publicitaria"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Descripcion" type="RichTextLabel" parent="Scroll/Campanas/CardValla/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("3_bs0ky")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "Inversión alta. Posiciona la tienda como referente del sector.
+[color=#2ecc71]+60 Reputación[/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Costo" type="Label" parent="Scroll/Campanas/CardValla/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_bs0ky")
+theme_override_font_sizes/font_size = 40
+text = "Costo: $200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnContratar" type="Button" parent="Scroll/Campanas/CardValla/VBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_g6phm")
+theme_override_font_sizes/font_size = 36
+text = "Contratar"

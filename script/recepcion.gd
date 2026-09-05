@@ -16,7 +16,6 @@ const MONITOR_ESCENA = preload("res://escena/monitor_virtual.tscn")
 
 var clientes_atendidos_hoy: int = 0
 var max_clientes_hoy: int = 5
-var dia_actual: int = 1
 var cliente_actual: Node2D = null
 var datos_venta_actual: Dictionary = {}
 
@@ -27,6 +26,9 @@ func _ready() -> void:
 	
 	EconomiaGlobal.dinero_cambiado.connect(_on_dinero_cambiado)
 	EconomiaGlobal.inflacion_cambiada.connect(_on_inflacion_cambiada)
+	
+	if EconomiaGlobal.has_signal("reputacion_cambiada"):
+		EconomiaGlobal.reputacion_cambiada.connect(_on_reputacion_cambiada)
 	
 	actualizar_ui()
 
@@ -134,7 +136,7 @@ func despachar_cliente() -> void:
 		var balance_instancia = BALANCE_ESCENA.instantiate()
 		balance_instancia.dia_finalizado.connect(_on_nuevo_dia_iniciado)
 		add_child(balance_instancia)
-		balance_instancia.mostrar_balance(dia_actual, clientes_atendidos_hoy, max_clientes_hoy)
+		balance_instancia.mostrar_balance(EconomiaGlobal.dia_actual, clientes_atendidos_hoy, max_clientes_hoy)
 	else:
 		var factor_espera = 1.0 + ((100 - EconomiaGlobal.reputacion) / 20.0)
 		var tiempo_espera = randf_range(1.5, 4.0) * factor_espera
@@ -169,7 +171,7 @@ func actualizar_ui() -> void:
 	_on_dinero_cambiado(EconomiaGlobal.dinero)
 	_on_inflacion_cambiada(EconomiaGlobal.tasa_inflacion)
 	_actualizar_label_reputacion(EconomiaGlobal.reputacion)
-	label_dia.text = "Día: " + str(dia_actual)
+	label_dia.text = "Día: " + str(EconomiaGlobal.dia_actual)
 
 func _on_dinero_cambiado(nuevo_monto: float) -> void:
 	label_dinero.text = "Dinero: $" + str(snapped(nuevo_monto, 0.01))
@@ -177,6 +179,9 @@ func _on_dinero_cambiado(nuevo_monto: float) -> void:
 func _on_inflacion_cambiada(nueva_tasa: float) -> void:
 	var porcentaje = nueva_tasa * 100
 	label_inflacion.text = "Inflación: " + str(snapped(porcentaje, 0.1)) + "%"
+
+func _on_reputacion_cambiada(nueva_rep: int) -> void:
+	_actualizar_label_reputacion(nueva_rep)
 
 func _actualizar_label_reputacion(nueva_rep: int) -> void:
 	label_reputacion.text = "Fama: " + str(nueva_rep) + "%"
@@ -190,10 +195,9 @@ func _on_nuevo_dia_iniciado() -> void:
 		if hijo.has_signal("dia_finalizado") or hijo.has_method("mostrar_balance"):
 			hijo.queue_free()
 
-	dia_actual += 1
-	label_dia.text = "Día: " + str(dia_actual)
-	clientes_atendidos_hoy = 0
 	EconomiaGlobal.iniciar_nuevo_dia()
+	label_dia.text = "Día: " + str(EconomiaGlobal.dia_actual)
+	clientes_atendidos_hoy = 0
 	
 	if EconomiaGlobal.reputacion > 70:
 		max_clientes_hoy = randi_range(6, 8)

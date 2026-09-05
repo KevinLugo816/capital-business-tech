@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bvpf1jwummjjn"]
+[gd_scene load_steps=25 format=3 uid="uid://bvpf1jwummjjn"]
 
 [ext_resource type="Script" uid="uid://dtc65jfy5c3ap" path="res://script/inventario_menu.gd" id="1_mxufo"]
 [ext_resource type="Texture2D" uid="uid://ggaseyr2sfkx" path="res://sprite/fondos/fondo_inven.png" id="2_k8rlb"]
@@ -175,6 +175,17 @@ corner_radius_bottom_left = 8
 shadow_size = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ncii5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pgna"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.77254903)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwu4a"]
 bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.26666668)
@@ -363,6 +374,7 @@ offset_left = 1625.0
 offset_top = 8.0
 offset_right = 1913.0
 offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6pgna")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Alerta"]
 layout_mode = 2

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnsvj0ceuc1ou"
-path="res://.godot/imported/icono_mayorista.png-303608398703e7f01337618177426d8e.ctex"
+uid="uid://ck45fa5mi7ik5"
+path="res://.godot/imported/alerta.png-34ce33df5565ad8d9920fbdb83e88a02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/assets/icono_mayorista.png"
-dest_files=["res://.godot/imported/icono_mayorista.png-303608398703e7f01337618177426d8e.ctex"]
+source_file="res://sprite/iconos/alerta.png"
+dest_files=["res://.godot/imported/alerta.png-34ce33df5565ad8d9920fbdb83e88a02.ctex"]
 
 [params]
 

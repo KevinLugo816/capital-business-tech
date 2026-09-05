@@ -8,7 +8,9 @@ signal paciencia_agotada(cliente)
 
 @export var variaciones_clientes: Array[Texture2D] = [
 	preload("res://sprite/personajes/cliente_1.png"),
-	preload("res://sprite/personajes/cliente_2.png")
+	preload("res://sprite/personajes/cliente_2.png"),
+	preload("res://sprite/personajes/cliente_3.png"),
+	preload("res://sprite/personajes/cliente_4.png")
 ]
 
 @export var tiempo_espera: float = 60.0
