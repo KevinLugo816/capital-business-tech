@@ -1,28 +1,62 @@
-[gd_scene format=3 uid="uid://dkca8i11ykkhc"]
+[gd_scene load_steps=9 format=3 uid="uid://dkca8i11ykkhc"]
+
+[ext_resource type="Texture2D" uid="uid://dgixgiafpwr7v" path="res://sprite/fondos/fondo_tienda.png" id="1_ev7lf"]
+[ext_resource type="FontFile" uid="uid://c50awhq4ebgoe" path="res://sprite/fuentes/LEMONMILK-Medium.otf" id="2_0p01y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0p01y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2kmg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8lqto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nr4fv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dyew"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs06e"]
 
 [node name="MenuContenido" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="BtnRecep" type="Button" parent="."]
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ev7lf")
+
+[node name="BtnComenzar" type="Button" parent="."]
 layout_mode = 0
 offset_left = 269.0
 offset_top = 417.0
 offset_right = 549.0
 offset_bottom = 697.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_0p01y")
 theme_override_font_sizes/font_size = 36
-text = "Recepción"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0p01y")
+text = "Comenzar"
 
-[node name="BtnInventario" type="Button" parent="."]
+[node name="BtnMinijuego" type="Button" parent="."]
 layout_mode = 0
 offset_left = 578.0
 offset_top = 74.0
 offset_right = 858.0
 offset_bottom = 354.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_0p01y")
 theme_override_font_sizes/font_size = 36
-text = "Inventario"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a2kmg")
+text = "Minijuegos"
 
 [node name="BtnEstadistic" type="Button" parent="."]
 layout_mode = 0
@@ -31,28 +65,37 @@ offset_top = 767.0
 offset_right = 856.0
 offset_bottom = 1047.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_0p01y")
 theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8lqto")
 text = "Estadísticas"
 
-[node name="BtnJugador" type="Button" parent="."]
+[node name="BtnLogros" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1021.0
 offset_top = 73.0
 offset_right = 1301.0
 offset_bottom = 353.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_0p01y")
 theme_override_font_sizes/font_size = 36
-text = "Jugador"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nr4fv")
+text = "Logros"
 
-[node name="BtnMinijuego" type="Button" parent="."]
+[node name="BtnOpcion" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1331.0
 offset_top = 417.0
 offset_right = 1611.0
 offset_bottom = 697.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_0p01y")
 theme_override_font_sizes/font_size = 36
-text = "Minijuegos"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3dyew")
+text = "Opciones"
 
 [node name="BtnTutorial" type="Button" parent="."]
 layout_mode = 0
@@ -61,5 +104,8 @@ offset_top = 766.0
 offset_right = 1305.0
 offset_bottom = 1046.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_0p01y")
 theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rs06e")
 text = "Tutorial"

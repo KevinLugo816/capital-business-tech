@@ -60,21 +60,37 @@ func _ready() -> void:
 	if is_instance_valid(inven_margin): inven_margin.show()
 	if is_instance_valid(mayorista_margin): mayorista_margin.hide()
 	
-	if is_instance_valid(btn_ir_mayorista):
+	if is_instance_valid(btn_ir_mayorista) and not btn_ir_mayorista.pressed.is_connected(abrir_vista_mayorista):
 		btn_ir_mayorista.pressed.connect(abrir_vista_mayorista)
 		
 	if is_instance_valid(mayorista_margin):
-		if mayorista_margin.has_signal("volver_al_inventario_solicitado"):
+		if mayorista_margin.has_signal("volver_al_inventario_solicitado") and not mayorista_margin.volver_al_inventario_solicitado.is_connected(abrir_vista_inventario):
 			mayorista_margin.volver_al_inventario_solicitado.connect(abrir_vista_inventario)
-		if mayorista_margin.has_signal("compra_realizada"):
+		if mayorista_margin.has_signal("compra_realizada") and not mayorista_margin.compra_realizada.is_connected(actualizar_ui):
 			mayorista_margin.compra_realizada.connect(actualizar_ui)
+		if mayorista_margin.has_signal("solicitud_popup_imagen") and not mayorista_margin.solicitud_popup_imagen.is_connected(mostrar_popup_imagen):
+			mayorista_margin.solicitud_popup_imagen.connect(mostrar_popup_imagen)
 
-	if EconomiaGlobal.has_signal("dinero_cambiado"):
+	if EconomiaGlobal.has_signal("dinero_cambiado") and not EconomiaGlobal.dinero_cambiado.is_connected(_on_dinero_cambiado):
 		EconomiaGlobal.dinero_cambiado.connect(_on_dinero_cambiado)
-	if EconomiaGlobal.has_signal("inflacion_cambiada"):
+	if EconomiaGlobal.has_signal("inflacion_cambiada") and not EconomiaGlobal.inflacion_cambiada.is_connected(_on_inflacion_cambiada):
 		EconomiaGlobal.inflacion_cambiada.connect(_on_inflacion_cambiada)
 
 	actualizar_ui()
+
+func _exit_tree() -> void:
+	if EconomiaGlobal.has_signal("dinero_cambiado") and EconomiaGlobal.dinero_cambiado.is_connected(_on_dinero_cambiado):
+		EconomiaGlobal.dinero_cambiado.disconnect(_on_dinero_cambiado)
+	if EconomiaGlobal.has_signal("inflacion_cambiada") and EconomiaGlobal.inflacion_cambiada.is_connected(_on_inflacion_cambiada):
+		EconomiaGlobal.inflacion_cambiada.disconnect(_on_inflacion_cambiada)
+
+	if is_instance_valid(mayorista_margin):
+		if mayorista_margin.has_signal("volver_al_inventario_solicitado") and mayorista_margin.volver_al_inventario_solicitado.is_connected(abrir_vista_inventario):
+			mayorista_margin.volver_al_inventario_solicitado.disconnect(abrir_vista_inventario)
+		if mayorista_margin.has_signal("compra_realizada") and mayorista_margin.compra_realizada.is_connected(actualizar_ui):
+			mayorista_margin.compra_realizada.disconnect(actualizar_ui)
+		if mayorista_margin.has_signal("solicitud_popup_imagen") and mayorista_margin.solicitud_popup_imagen.is_connected(mostrar_popup_imagen):
+			mayorista_margin.solicitud_popup_imagen.disconnect(mostrar_popup_imagen)
 
 func _process(_delta: float) -> void:
 	actualizar_indicador_cliente()
@@ -155,6 +171,11 @@ func dibujar_inventario_local() -> void:
 	for n in lista_inventario.get_children():
 		n.queue_free()
 	
+	var recepcion = get_tree().current_scene
+	var esta_abierto: bool = false
+	if is_instance_valid(recepcion) and "local_abierto" in recepcion:
+		esta_abierto = recepcion.local_abierto
+	
 	var font_size_datos = 24
 	var anchos = {
 		"imagen": ANCHO_COL_IMAGEN,
@@ -168,7 +189,7 @@ func dibujar_inventario_local() -> void:
 	
 	for producto in Inventario.stock.keys():
 		var stock_actual = Inventario.obtener_cantidad(producto)
-		var precio_actual = Inventario.precios_venta_publico[producto]
+		var precio_actual = Inventario.precios_venta_publico.get(producto, 0.0)
 		var marca = marcas_productos.get(producto, "Genérico")
 		
 		var fila = InventarioUIFactory.crear_fila_producto(
@@ -179,19 +200,29 @@ func dibujar_inventario_local() -> void:
 			font_size_datos,
 			anchos,
 			Callable(self, "_on_precio_producto_cambiado"),
-			Callable(self, "mostrar_popup_imagen")
+			Callable(self, "mostrar_popup_imagen"),
+			esta_abierto
 		)
 		
 		lista_inventario.add_child(fila)
 		
 		var lbl_advertencia = fila.get_child(fila.get_child_count() - 1) as Label
-		evaluar_precio_producto(producto, precio_actual, lbl_advertencia)
+		
+		if esta_abierto:
+			lbl_advertencia.text = "Precios congelados durante horario de atención."
+			lbl_advertencia.add_theme_color_override("font_color", Color("95a5a6"))
+		else:
+			evaluar_precio_producto(producto, precio_actual, lbl_advertencia)
 
 func _on_precio_producto_cambiado(producto: String, nuevo_valor: float, lbl_advertencia: Label) -> void:
 	Inventario.precios_venta_publico[producto] = nuevo_valor
 	evaluar_precio_producto(producto, nuevo_valor, lbl_advertencia)
 
 func evaluar_precio_producto(producto: String, precio_jugador_base: float, label_feedback: Label) -> void:
+	if not precios_base_proveedor.has(producto):
+		label_feedback.text = "Producto sin base registrada."
+		return
+
 	var inflacion = EconomiaGlobal.tasa_inflacion
 	var iva = EconomiaGlobal.tasa_iva
 	
@@ -273,12 +304,8 @@ func mostrar_popup_imagen(textura: Texture2D, nombre_producto: String) -> void:
 	btn_cerrar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	btn_cerrar.add_theme_font_size_override("font_size", 24)
 	btn_cerrar.add_theme_constant_override("outline_size", 4)
-	btn_cerrar.pressed.connect(func(): overlay.queue_free())
-
-	overlay.gui_input.connect(func(event):
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			overlay.queue_free()
-	)
+	
+	btn_cerrar.pressed.connect(overlay.queue_free)
 
 	vbox.add_child(lbl_titulo)
 	vbox.add_child(img_grande)

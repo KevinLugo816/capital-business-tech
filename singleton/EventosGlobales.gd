@@ -30,7 +30,7 @@ var catalogo_eventos: Array[Dictionary] = [
 		"titulo": "¡ESPIRAL INFLACIONARIA!",
 		"descripcion": "Una ola especulativa dispara los precios. La inflación diaria aumenta bruscamente un [color=#e74c3c]+12%[/color].",
 		"tipo": "alerta",
-		"probabilidad": 0.15,
+		"probabilidad": 0.10,
 		"icono_tipo": "INFLACION",
 		"dia_minimo": 10
 	}
@@ -44,20 +44,33 @@ func evaluar_evento_del_dia() -> void:
 		return
 
 	var eventos_disponibles: Array[Dictionary] = []
+	var peso_total: float = 0.0
 	
 	for evento in catalogo_eventos:
 		if EconomiaGlobal.dia_actual >= evento.get("dia_minimo", 1):
 			eventos_disponibles.append(evento)
+			peso_total += evento.get("probabilidad", 0.1)
 
 	if eventos_disponibles.is_empty():
 		return
 
 	if randf() <= 0.40:
-		var evento_elegido = eventos_disponibles.pick_random()
+		var evento_elegido = _seleccionar_evento_ponderado(eventos_disponibles, peso_total)
 		if not evento_elegido.is_empty():
 			_aplicar_efectos_evento(evento_elegido)
 	else:
 		print("Día %d: Mercado estable, sin eventos hoy." % EconomiaGlobal.dia_actual)
+
+func _seleccionar_evento_ponderado(lista: Array[Dictionary], peso_total: float) -> Dictionary:
+	var roll = randf_range(0.0, peso_total)
+	var acumulado = 0.0
+	
+	for evento in lista:
+		acumulado += evento.get("probabilidad", 0.1)
+		if roll <= acumulado:
+			return evento
+			
+	return lista.pick_random() if not lista.is_empty() else {}
 
 func _aplicar_efectos_evento(evento: Dictionary) -> void:
 	if evento.is_empty():
@@ -67,11 +80,12 @@ func _aplicar_efectos_evento(evento: Dictionary) -> void:
 	
 	match evento.get("id", ""):
 		"hiperinflacion":
-			EconomiaGlobal.tasa_inflacion += 0.12
+			EconomiaGlobal.inflacion_extra_evento = 0.12
+			EconomiaGlobal.tasa_inflacion += EconomiaGlobal.inflacion_extra_evento
 		"escasez_importacion":
 			EconomiaGlobal.reputacion = clampi(EconomiaGlobal.reputacion + 5, 0, 100)
 		"subsidio_estatal":
-			EconomiaGlobal.costo_base_servicios *= 0.5
+			EconomiaGlobal.multiplicador_servicios_evento = 0.5
 		_:
 			print("Advertencia: Se intentó aplicar un evento sin ID válido.")
 			return

@@ -14,6 +14,7 @@ extends Control
 @onready var btn_max_pagar = $VBoxContainer/HBoxMonto/BtnMaxPagar
 
 var tween_mensaje: Tween
+const COMISION_APERTURA: float = 0.03
 
 func _ready() -> void:
 	if not EconomiaGlobal.dinero_cambiado.is_connected(_on_dinero_cambiado):
@@ -32,6 +33,12 @@ func _ready() -> void:
 		
 	_configurar_tamano_spinbox(36)
 	actualizar_ui()
+
+func _exit_tree() -> void:
+	if EconomiaGlobal.dinero_cambiado.is_connected(_on_dinero_cambiado):
+		EconomiaGlobal.dinero_cambiado.disconnect(_on_dinero_cambiado)
+	if EconomiaGlobal.score_cambiado.is_connected(_on_score_cambiado):
+		EconomiaGlobal.score_cambiado.disconnect(_on_score_cambiado)
 
 func _on_dinero_cambiado(_nuevo_monto: float) -> void:
 	actualizar_ui()
@@ -53,7 +60,7 @@ func actualizar_ui() -> void:
 	if is_instance_valid(lbl_score):
 		lbl_score.text = "Score Crediticio: %d/100" % EconomiaGlobal.score_crediticio
 	
-	var tasa_total = EconomiaGlobal.tasa_interes_diario + EconomiaGlobal.tasa_inflacion
+	var tasa_total = min(EconomiaGlobal.tasa_interes_diario + EconomiaGlobal.tasa_inflacion, EconomiaGlobal.TASA_DIARIA_MAXIMA)
 	if is_instance_valid(lbl_tasa_interes):
 		lbl_tasa_interes.text = "Tasa Diaria Total: %s%%" % _f(tasa_total * 100.0)
 
@@ -63,8 +70,8 @@ func _validar_botones() -> void:
 	var monto = spin_monto.value if is_instance_valid(spin_monto) else 0.0
 	var credito_disponible = EconomiaGlobal.limite_credito_actual - EconomiaGlobal.deuda_actual
 
-	btn_solicitar.disabled = (monto <= 0) or (monto > credito_disponible)
-	btn_pagar.disabled = (monto <= 0) or (EconomiaGlobal.deuda_actual <= 0) or (monto > EconomiaGlobal.dinero)
+	btn_solicitar.disabled = (monto < 1.0) or (monto > credito_disponible + 0.001)
+	btn_pagar.disabled = (monto < 1.0) or (EconomiaGlobal.deuda_actual <= 0) or (monto > EconomiaGlobal.dinero + 0.001)
 
 func _on_spin_box_monto_value_changed(_value: float) -> void:
 	_validar_botones()
@@ -73,7 +80,9 @@ func _on_btn_solicitar_pressed() -> void:
 	var monto = spin_monto.value
 
 	if EconomiaGlobal.pedir_prestamo(monto):
-		_mostrar_notificacion("¡Préstamo aprobado de $%s!" % _f(monto), Color.GREEN)
+		var comision = monto * COMISION_APERTURA
+		EconomiaGlobal.deuda_actual += comision
+		_mostrar_notificacion("Préstamo aprobado: $%s (Comisión bancaria: $%s)" % [_f(monto), _f(comision)], Color.GREEN)
 		actualizar_ui()
 	else:
 		_mostrar_notificacion("No se pudo procesar la solicitud de préstamo.", Color.RED)
@@ -85,12 +94,17 @@ func _on_btn_pagar_pressed() -> void:
 		abono = EconomiaGlobal.deuda_actual
 		
 	if abono > 0 and EconomiaGlobal.restar_dinero(abono):
+		var _deuda_previa = EconomiaGlobal.deuda_actual
 		EconomiaGlobal.deuda_actual -= abono
 		
 		if EconomiaGlobal.deuda_actual <= 0.001:
 			EconomiaGlobal.deuda_actual = 0.0
-			EconomiaGlobal.registrar_deuda_saldada() 
-			_mostrar_notificacion("¡Felicidades! Has saldado tu deuda por completo.", Color.GREEN)
+			if EconomiaGlobal.dias_con_deuda_actual > 0:
+				EconomiaGlobal.registrar_deuda_saldada() 
+				_mostrar_notificacion("¡Felicidades! Has saldado tu deuda por completo.", Color.GREEN)
+			else:
+				EconomiaGlobal.dias_con_deuda_actual = 0
+				_mostrar_notificacion("Deuda saldada en el mismo día (Sin bonificación de score).", Color.LIGHT_BLUE)
 		else:
 			_mostrar_notificacion("Has abonado $%s a tu deuda." % _f(abono), Color.CYAN)
 			
@@ -100,12 +114,12 @@ func _on_btn_pagar_pressed() -> void:
 
 func _on_btn_max_solicitar_pressed() -> void:
 	var credito_disponible = EconomiaGlobal.limite_credito_actual - EconomiaGlobal.deuda_actual
-	spin_monto.value = max(0.0, credito_disponible)
+	spin_monto.value = max(0.0, snapped(credito_disponible, 0.01))
 	_validar_botones()
 
 func _on_btn_max_pagar_pressed() -> void:
 	var max_pagable = min(EconomiaGlobal.dinero, EconomiaGlobal.deuda_actual)
-	spin_monto.value = max(0.0, max_pagable)
+	spin_monto.value = max(0.0, snapped(max_pagable, 0.01))
 	_validar_botones()
 
 func _mostrar_notificacion(texto: String, color: Color) -> void:
@@ -122,8 +136,9 @@ func _mostrar_notificacion(texto: String, color: Color) -> void:
 	tween_mensaje.tween_interval(3.0)
 	tween_mensaje.tween_property(lbl_mensaje, "modulate:a", 0.0, 0.5)
 	tween_mensaje.tween_callback(func(): 
-		lbl_mensaje.text = ""
-		lbl_mensaje.modulate.a = 1.0
+		if is_instance_valid(lbl_mensaje):
+			lbl_mensaje.text = ""
+			lbl_mensaje.modulate.a = 1.0
 	)
 
 func _f(monto: float) -> String:

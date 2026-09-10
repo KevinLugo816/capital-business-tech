@@ -16,7 +16,7 @@ var dinero: float = 500.0 :
 # --- LÓGICA DE INFLACIÓN ---
 var tasa_inflacion: float = 0.0 : 
 	set(valor):
-		tasa_inflacion = valor
+		tasa_inflacion = max(0.0, valor)
 		inflacion_cambiada.emit(tasa_inflacion)
 
 var historial_inflacion: Array[float] = [0.0]
@@ -55,6 +55,10 @@ const TASA_DIARIA_MAXIMA: float = 0.10
 var tasa_iva: float = 0.16
 var iva_acumulado_hoy: float = 0.0
 
+# --- MODIFICADORES TEMPORALES DE EVENTOS ---
+var multiplicador_servicios_evento: float = 1.0
+var inflacion_extra_evento: float = 0.0
+
 # --- OFERTA DIARIA DEL MAYORISTA ---
 var gastos_mayorista_hoy: float = 0.0
 var producto_en_oferta: String = ""
@@ -82,7 +86,7 @@ func aplicar_cobro_forzoso(monto: float) -> void:
 
 # --- MÉTODOS DE SIMULACIÓN Y JORNADA ---
 func simular_inflacion_diaria() -> void:
-	tasa_inflacion += randf_range(-0.02, 0.05)
+	tasa_inflacion += randf_range(-0.01, 0.03)
 
 func registrar_ingreso_venta(monto: float) -> void:
 	ingresos_del_dia += monto
@@ -112,7 +116,7 @@ func pedir_prestamo(monto: float) -> bool:
 
 func registrar_deuda_saldada() -> void:
 	if dias_con_deuda_actual > 0:
-		actualizar_score_crediticio(5)
+		actualizar_score_crediticio(8)
 		dias_con_deuda_actual = 0
 
 func aplicar_intereses_deuda() -> void:
@@ -125,10 +129,8 @@ func aplicar_intereses_deuda() -> void:
 		deuda_actual += deuda_actual * tasa_diaria_total
 		
 		if dias_con_deuda_actual >= 3:
-			actualizar_score_crediticio(-2)
+			actualizar_score_crediticio(-3)
 		print("El banco aplicó intereses. Nueva deuda: $", snapped(deuda_actual, 0.01))
-	else:
-		actualizar_score_crediticio(2)
 
 func limpiar_impuestos_diarios() -> void:
 	iva_acumulado_hoy = 0.0
@@ -139,12 +141,22 @@ func generar_oferta_del_dia() -> void:
 	else:
 		producto_en_oferta = ""
 
+func resetear_efectos_eventos() -> void:
+	multiplicador_servicios_evento = 1.0
+	if inflacion_extra_evento > 0.0:
+		tasa_inflacion -= inflacion_extra_evento
+		inflacion_extra_evento = 0.0
+
 func iniciar_nuevo_dia() -> void:
 	dia_actual += 1
 	ingresos_del_dia = 0.0
 	gastos_del_dia = 0.0
 	gastos_mayorista_hoy = 0.0
 	costo_base_servicios = 15.0
+	campana_activa_hoy = false
+	
+	resetear_efectos_eventos()
+	simular_inflacion_diaria()
 	limpiar_impuestos_diarios()
 	generar_oferta_del_dia()
 	historial_inflacion.append(tasa_inflacion)
@@ -157,7 +169,9 @@ func procesar_cierre_diario(p_dia_actual: int) -> Dictionary:
 	var ingresos = ingresos_del_dia
 	var impuestos_a_pagar = iva_acumulado_hoy
 	
-	var servicios_inflados = costo_base_servicios * (1.0 + tasa_inflacion)
+	var costo_servicios_actual = costo_base_servicios * multiplicador_servicios_evento
+	var servicios_inflados = costo_servicios_actual * (1.0 + tasa_inflacion)
+	
 	var alquiler_inflado = 0.0
 	if p_dia_actual % 5 == 0:
 		alquiler_inflado = costo_base_alquiler * (1.0 + tasa_inflacion)

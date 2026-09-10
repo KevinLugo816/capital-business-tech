@@ -1,15 +1,6 @@
 class_name InventarioUIFactory
 extends Node
 
-const TEXTURAS_PRODUCTOS = {
-	"Memoria RAM 8GB": "res://sprite/assets/productos/memory_ram_princeston.png",
-	"Disco SSD 480GB": "res://sprite/assets/productos/disco_ssd_winxx.png",
-	"Cargador Tipo C": "res://sprite/assets/productos/charger_earm.png",
-	"Teléfono Gama Baja": "res://sprite/assets/productos/telefono_gamabaja_xamo.png"
-}
-
-const TEXTURA_DEFAULT = "res://sprite/iconos/imagen.svg"
-
 static func crear_fila_producto(
 	producto: String,
 	stock_actual: int,
@@ -18,7 +9,8 @@ static func crear_fila_producto(
 	font_size: int,
 	anchos: Dictionary,
 	on_precio_cambiado: Callable,
-	on_imagen_clicada: Callable
+	on_imagen_clicada: Callable,
+	local_abierto: bool = false
 ) -> HBoxContainer:
 
 	var fila = HBoxContainer.new()
@@ -26,13 +18,8 @@ static func crear_fila_producto(
 	fila.custom_minimum_size.y = 110
 
 	var tex_rect = TextureRect.new()
-	var ruta_imagen = TEXTURAS_PRODUCTOS.get(producto, TEXTURA_DEFAULT)
-	
-	if ResourceLoader.exists(ruta_imagen):
-		tex_rect.texture = load(ruta_imagen)
-	else:
-		tex_rect.texture = load(TEXTURA_DEFAULT)
-		
+	tex_rect.texture = Inventario.obtener_textura_producto(producto)
+
 	tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	tex_rect.custom_minimum_size = Vector2(anchos.get("imagen", 120), 96)
@@ -41,9 +28,11 @@ static func crear_fila_producto(
 	tex_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	tex_rect.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
-	tex_rect.gui_input.connect(func(event):
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			on_imagen_clicada.call(tex_rect.texture, producto)
+	tex_rect.gui_input.connect(
+		func(event: InputEvent):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				if on_imagen_clicada.is_valid():
+					on_imagen_clicada.call(tex_rect.texture, producto)
 	)
 
 	fila.add_child(tex_rect)
@@ -95,12 +84,16 @@ static func crear_fila_producto(
 	
 	var selector_precio = SpinBox.new()
 	selector_precio.min_value = 1.0
-	selector_precio.max_value = 1000.0
-	selector_precio.step = 0.50
+	selector_precio.max_value = 2000.0
+	selector_precio.step = 0.5
 	selector_precio.value = precio_actual
 	selector_precio.custom_minimum_size = Vector2(120, 50)
 	selector_precio.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	selector_precio.get_line_edit().add_theme_font_size_override("font_size", font_size)
+	
+	if local_abierto:
+		selector_precio.editable = false
+		selector_precio.tooltip_text = "No puedes cambiar precios con el local abierto."
 	
 	contenedor_precio.add_child(lbl_signo)
 	contenedor_precio.add_child(selector_precio)
@@ -115,8 +108,10 @@ static func crear_fila_producto(
 	lbl_advertencia.add_theme_color_override("font_outline_color", Color.BLACK)
 	fila.add_child(lbl_advertencia)
 
-	selector_precio.value_changed.connect(func(nuevo_valor):
-		on_precio_cambiado.call(producto, nuevo_valor, lbl_advertencia)
+	selector_precio.value_changed.connect(
+		func(nuevo_valor: float):
+			if on_precio_cambiado.is_valid():
+				on_precio_cambiado.call(producto, nuevo_valor, lbl_advertencia)
 	)
 
 	return fila
