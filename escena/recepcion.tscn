@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b0mfmdmtfdbbe"]
+[gd_scene load_steps=40 format=3 uid="uid://b0mfmdmtfdbbe"]
 
 [ext_resource type="Texture2D" uid="uid://bdiuild5wu1wv" path="res://sprite/fondos/fondo_recep.png" id="1_2lou8"]
 [ext_resource type="Script" uid="uid://cm0gq10xko2bp" path="res://script/recepcion.gd" id="1_vmqee"]
@@ -167,6 +167,55 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4unrc"]
 bg_color = Color(0.7943986, 3.2247603e-06, 9.62615e-07, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.000113828006, 0.000113828064, 0.00011382786, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwu64"]
+bg_color = Color(0.9372549, 0.72156864, 0.0627451, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.000113828006, 0.000113828064, 0.00011382786, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lunt2"]
+bg_color = Color(0.7288224, 0.55755544, 0.022307063, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqkd4"]
+bg_color = Color(0.9987238, 0.840185, 0.47940153, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0006938975, 0.00069389783, 0.00069389667, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqyl1"]
+bg_color = Color(0.9372549, 0.72156864, 0.0627451, 1)
 border_width_left = 6
 border_width_top = 6
 border_width_right = 6
@@ -448,12 +497,18 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonV" type="Button" parent="UI/Menu/PanelDialogo"]
+[node name="HBoxBotones" type="HBoxContainer" parent="UI/Menu/PanelDialogo"]
 layout_mode = 0
 offset_left = 1253.0
 offset_top = -129.0
-offset_right = 1349.0
+offset_right = 1607.0
 offset_bottom = -33.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ButtonV" type="Button" parent="UI/Menu/PanelDialogo/HBoxBotones"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 theme_override_constants/outline_size = 6
@@ -466,12 +521,9 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_5kpo7")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_x571o")
 text = "V"
 
-[node name="ButtonX" type="Button" parent="UI/Menu/PanelDialogo"]
-layout_mode = 0
-offset_left = 1373.0
-offset_top = -129.0
-offset_right = 1469.0
-offset_bottom = -33.0
+[node name="ButtonX" type="Button" parent="UI/Menu/PanelDialogo/HBoxBotones"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 theme_override_constants/outline_size = 6
@@ -483,6 +535,24 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_l5kyc")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_4unrc")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_x571o")
 text = "X"
+
+[node name="ButtonDesc" type="Button" parent="UI/Menu/PanelDialogo/HBoxBotones"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.06675519, 0.066754915, 0.06675498, 1)
+theme_override_colors/font_pressed_color = Color(0.06666667, 0.06666667, 0.06666667, 1)
+theme_override_colors/font_hover_color = Color(0.06666667, 0.06666667, 0.06666667, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_x571o")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_wwu64")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lunt2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jqkd4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_eqyl1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x571o")
+text = "%"
 
 [node name="PanelPrevia" type="PanelContainer" parent="UI/Menu"]
 layout_mode = 1
@@ -551,11 +621,9 @@ text = "Inventario"
 [node name="BtnComenzar" type="Button" parent="UI"]
 anchors_preset = -1
 anchor_left = 0.3997396
-anchor_top = 0.58518517
+anchor_top = 0.62222224
 anchor_right = 0.60026044
-anchor_bottom = 0.67314816
-offset_top = 40.0
-offset_bottom = 40.0
+anchor_bottom = 0.71018517
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
@@ -590,8 +658,9 @@ text = "Local Cerrado"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="UI/Menu/PanelDialogo/ButtonV" to="." method="_on_button_aceptar_pressed"]
-[connection signal="pressed" from="UI/Menu/PanelDialogo/ButtonX" to="." method="_on_button_rechazar_pressed"]
+[connection signal="pressed" from="UI/Menu/PanelDialogo/HBoxBotones/ButtonV" to="." method="_on_button_aceptar_pressed"]
+[connection signal="pressed" from="UI/Menu/PanelDialogo/HBoxBotones/ButtonX" to="." method="_on_button_rechazar_pressed"]
+[connection signal="pressed" from="UI/Menu/PanelDialogo/HBoxBotones/ButtonDesc" to="." method="_on_button_descuento_pressed"]
 [connection signal="pressed" from="UI/BotonMonitor" to="." method="_on_boton_monitor_pressed"]
 [connection signal="pressed" from="UI/BotonInventario" to="." method="_on_boton_inventario_pressed"]
 [connection signal="pressed" from="UI/BtnComenzar" to="." method="_on_boton_abrir_local_pressed"]

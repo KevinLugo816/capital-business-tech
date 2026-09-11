@@ -80,14 +80,16 @@ func generar_cliente() -> void:
 	actualizar_interfaz_dialogo()
 
 func actualizar_interfaz_dialogo() -> void:
-	if datos_venta_actual.is_empty():
+	if datos_venta_actual.is_empty() or not is_instance_valid(cliente_actual):
 		return
 
 	var producto = datos_venta_actual["producto"]
 	var cantidad = datos_venta_actual["cantidad"]
 	var total_dinero = datos_venta_actual["total"]
 
-	var mensaje = "Cliente: ¡Hola! Me gustaría comprar:\n"
+	var saludo = cliente_actual.obtener_frase_saludo()
+
+	var mensaje = saludo
 	mensaje += "- " + str(cantidad) + "x [color=#ffde21]" + producto + "[/color]\n"
 	mensaje += "Total a Pagar: [color=#2ecc71]$" + str(snapped(total_dinero, 0.01)) + "[/color]"
 
@@ -111,8 +113,6 @@ func _on_button_aceptar_pressed() -> void:
 		return
 	respuesta_en_proceso = true
 
-	menu_recepcion.hide()
-	
 	var producto = datos_venta_actual["producto"]
 	var cantidad = datos_venta_actual["cantidad"]
 	var ingreso = datos_venta_actual["total"]
@@ -120,30 +120,34 @@ func _on_button_aceptar_pressed() -> void:
 	
 	if not Inventario.tiene_producto(producto, cantidad):
 		print("Venta fallida por falta de stock.")
+		menu_recepcion.hide()
 		EconomiaGlobal.reputacion -= 5
 		_actualizar_label_reputacion(EconomiaGlobal.reputacion)
 		AnimUiManager.animar_reputacion(-5, label_reputacion.global_position + Vector2(10, 20))
-		
 		despachar_cliente()
 		return
 
 	if esta_especulando:
-		print("¡El cliente se dio cuenta del sobreprecio y canceló la compra!")
-		EconomiaGlobal.reputacion -= 15 
+		print("¡El cliente se dio cuenta del sobreprecio!")
+		EconomiaGlobal.reputacion -= 10
 		_actualizar_label_reputacion(EconomiaGlobal.reputacion)
-		AnimUiManager.animar_reputacion(-15, label_reputacion.global_position + Vector2(10, 20))
+		AnimUiManager.animar_reputacion(-10, label_reputacion.global_position + Vector2(10, 20))
 		
-		texto_pedido.text = "Cliente: [color=#e74c3c]¡Qué abuso! Ese precio es ridículamente alto. ¡No pienso comprar aquí![/color]"
-		menu_recepcion.show()
+		var queja = cliente_actual.obtener_frase_queja() if is_instance_valid(cliente_actual) else "¡Precio muy alto!"
+		texto_pedido.text = "Cliente: [color=#e74c3c]" + queja + "[/color]"
+		
+		_set_botones_interfaz_activos(false)
 		
 		if is_instance_valid(cliente_actual) and cliente_actual.has_method("detener_espera"):
 			cliente_actual.detener_espera()
 
 		await get_tree().create_timer(2.0).timeout
 		menu_recepcion.hide()
+		_set_botones_interfaz_activos(true)
 		despachar_cliente()
 
 	else:
+		menu_recepcion.hide()
 		Inventario.modificar_stock(producto, -cantidad)
 		EconomiaGlobal.registrar_ingreso_venta(ingreso)
 		AudioManager.reproducir_ingreso()
@@ -153,16 +157,9 @@ func _on_button_aceptar_pressed() -> void:
 		EconomiaGlobal.iva_acumulado_hoy += iva_retenido
 		
 		var precio_justo_total = datos_venta_actual["precio_justo"] * cantidad
-		var cambio_rep = 0
-		
-		if ingreso <= (precio_justo_total * 0.85):
-			cambio_rep = 8
-		else:
-			cambio_rep = 2
-			print("Venta procesada con éxito")
+		var cambio_rep = 8 if ingreso <= (precio_justo_total * 0.85) else 2
 			
 		var rep_antes = EconomiaGlobal.reputacion
-		
 		EconomiaGlobal.reputacion += cambio_rep
 		_actualizar_label_reputacion(EconomiaGlobal.reputacion)
 		
@@ -183,6 +180,73 @@ func _on_button_rechazar_pressed() -> void:
 	AnimUiManager.animar_reputacion(-1, label_reputacion.global_position + Vector2(10, 20))
 	
 	despachar_cliente()
+
+func _on_button_descuento_pressed() -> void:
+	if respuesta_en_proceso or datos_venta_actual.is_empty():
+		return
+	respuesta_en_proceso = true
+		
+	var producto = datos_venta_actual["producto"]
+	var cantidad = datos_venta_actual["cantidad"]
+
+	if not Inventario.tiene_producto(producto, cantidad):
+		print("No se puede ofrecer descuento sin stock.")
+		menu_recepcion.hide()
+		EconomiaGlobal.reputacion -= 5
+		_actualizar_label_reputacion(EconomiaGlobal.reputacion)
+		AnimUiManager.animar_reputacion(-5, label_reputacion.global_position + Vector2(10, 20))
+		despachar_cliente()
+		return
+
+	var total_original = datos_venta_actual["total"]
+	var total_con_descuento = total_original * 0.85
+	var iva_descontado = datos_venta_actual["iva"] * 0.85
+	
+	var precio_justo_total = datos_venta_actual["precio_justo"] * cantidad
+	var es_aceptable = total_con_descuento <= (precio_justo_total * 1.15)
+
+	if es_aceptable:
+		Inventario.modificar_stock(producto, -cantidad)
+		EconomiaGlobal.registrar_ingreso_venta(total_con_descuento)
+		EconomiaGlobal.iva_acumulado_hoy += iva_descontado
+		
+		AudioManager.reproducir_ingreso()
+		AnimUiManager.animar_dinero(total_con_descuento, label_dinero.global_position + Vector2(10, 20))
+		
+		EconomiaGlobal.reputacion += 4
+		_actualizar_label_reputacion(EconomiaGlobal.reputacion)
+		AnimUiManager.animar_reputacion(4, label_reputacion.global_position + Vector2(10, 20))
+		
+		texto_pedido.text = "Cliente: [color=#2ecc71]¡Excelente oferta! Me parece un precio justo. Me lo llevo.[/color]"
+		_set_botones_interfaz_activos(false)
+		
+		if is_instance_valid(cliente_actual) and cliente_actual.has_method("detener_espera"):
+			cliente_actual.detener_espera()
+			
+		await get_tree().create_timer(1.8).timeout
+		menu_recepcion.hide()
+		_set_botones_interfaz_activos(true)
+		despachar_cliente()
+	else:
+		EconomiaGlobal.reputacion -= 5
+		_actualizar_label_reputacion(EconomiaGlobal.reputacion)
+		AnimUiManager.animar_reputacion(-5, label_reputacion.global_position + Vector2(10, 20))
+
+		texto_pedido.text = "Cliente: [color=#e74c3c]Incluso con descuento sigue estando exorbitante. ¡No gracias![/color]"
+		_set_botones_interfaz_activos(false)
+		
+		if is_instance_valid(cliente_actual) and cliente_actual.has_method("detener_espera"):
+			cliente_actual.detener_espera()
+
+		await get_tree().create_timer(1.8).timeout
+		menu_recepcion.hide()
+		_set_botones_interfaz_activos(true)
+		despachar_cliente()
+
+func _set_botones_interfaz_activos(activo: bool) -> void:
+	var contenedor_botones = menu_recepcion.get_node_or_null("PanelDialogo/HBoxBotones")
+	if is_instance_valid(contenedor_botones):
+		contenedor_botones.visible = activo
 
 func despachar_cliente() -> void:
 	if is_instance_valid(cliente_actual):
@@ -222,9 +286,7 @@ func despachar_cliente() -> void:
 		
 		label_estado_local.text = "JORNADA FINALIZADA"
 		label_estado_local.show()
-		
 		await get_tree().create_timer(2.0).timeout
-		EconomiaGlobal.simular_inflacion_diaria()
 
 		var balance_instancia = BALANCE_ESCENA.instantiate()
 		balance_instancia.dia_finalizado.connect(_on_nuevo_dia_iniciado)
@@ -244,12 +306,20 @@ func _on_cliente_paciencia_agotada(_cliente: Node2D) -> void:
 	respuesta_en_proceso = true
 
 	print("¡El cliente perdió la paciencia y se fue!")
-	menu_recepcion.hide()
-
 	EconomiaGlobal.reputacion -= 5
 	_actualizar_label_reputacion(EconomiaGlobal.reputacion)
-
 	AnimUiManager.animar_reputacion(-5, label_reputacion.global_position + Vector2(10, 20))
+
+	if is_instance_valid(cliente_actual):
+		var frase_paciencia = cliente_actual.obtener_frase_paciencia()
+		texto_pedido.text = "Cliente: [color=#e74c3c]" + frase_paciencia + "[/color]"
+		
+		menu_recepcion.show()
+		_set_botones_interfaz_activos(false)
+		await get_tree().create_timer(2.0).timeout
+
+	menu_recepcion.hide()
+	_set_botones_interfaz_activos(true)
 	despachar_cliente()
 
 func _on_boton_monitor_pressed() -> void:

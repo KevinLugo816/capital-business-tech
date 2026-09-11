@@ -57,7 +57,7 @@ func mostrar_balance(dia_actual: int, clientes_atendidos: int, max_clientes: int
 		label_deuda.text = "• Deuda Pendiente con el Banco: [color=#e67e22]$%s[/color]" % _f(EconomiaGlobal.deuda_actual)
 	else:
 		label_deuda.hide()
-		
+	
 	var utilidad = reporte.utilidad_neta - EconomiaGlobal.gastos_mayorista_hoy
 	
 	if utilidad >= 0:
