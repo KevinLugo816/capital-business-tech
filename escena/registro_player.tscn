@@ -1,0 +1,379 @@
+[gd_scene load_steps=24 format=3 uid="uid://dug8qihuldupq"]
+
+[ext_resource type="Texture2D" uid="uid://boxu72mjjpypq" path="res://sprite/fondos/fondo_menu.png" id="1_8q1t6"]
+[ext_resource type="Script" uid="uid://be75p8jrdfg2r" path="res://script/registro_player.gd" id="1_ynql8"]
+[ext_resource type="Texture2D" uid="uid://dk63y6ruajevy" path="res://sprite/assets/portapapeles.png" id="2_hrw3e"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="3_s4add"]
+[ext_resource type="FontFile" uid="uid://c50awhq4ebgoe" path="res://sprite/fuentes/LEMONMILK-Medium.otf" id="4_abgbn"]
+[ext_resource type="Theme" uid="uid://bk0b7a5hrocx0" path="res://tema/tema_uno.tres" id="4_c06oi"]
+[ext_resource type="Texture2D" uid="uid://byequrgxfyo6c" path="res://sprite/iconos/imagen.svg" id="5_rkfv8"]
+[ext_resource type="FontFile" uid="uid://c3t87f2g615vn" path="res://sprite/fuentes/LEMONMILK-Regular.otf" id="7_lmytn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s4add"]
+texture = ExtResource("2_hrw3e")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_s4add"]
+grow_begin = -10.0
+grow_end = -10.0
+thickness = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4add"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 4
+border_color = Color(1.6530239e-05, 1.653022e-05, 1.65302e-05, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abgbn"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 4
+border_color = Color(1.6530239e-05, 1.653022e-05, 1.65302e-05, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4add"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abgbn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c06oi"]
+content_margin_top = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c06oi"]
+bg_color = Color(0, 0, 0, 0.7921569)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkfv8"]
+bg_color = Color(0, 0, 0, 0.58431375)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmytn"]
+bg_color = Color(0.31764707, 0.31764707, 0.31764707, 0.9137255)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynql8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynql8"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.7921569)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngfx4"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.58431375)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ln54"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.31764707, 0.31764707, 0.31764707, 0.9137255)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ddobf"]
+
+[node name="RegistroPlayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ynql8")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8q1t6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.28385416
+anchor_top = 0.11111111
+anchor_right = 0.7161458
+anchor_bottom = 0.962963
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2669271
+anchor_top = 0.0023148148
+anchor_right = 0.73307294
+anchor_bottom = 0.9976852
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s4add")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxMain" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05865922
+anchor_top = 0.17906977
+anchor_right = 0.9413408
+anchor_bottom = 0.9427907
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Titulo" type="Label" parent="Panel/VBoxMain"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.103743516, 0.10374353, 0.103743516, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 42
+text = "REGISTRO DE COMERCIANTE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxMain"]
+layout_mode = 2
+theme_override_constants/separation = 45
+theme_override_styles/separator = SubResource("StyleBoxLine_s4add")
+
+[node name="GridCampos" type="GridContainer" parent="Panel/VBoxMain"]
+layout_mode = 2
+theme_override_constants/v_separation = 42
+columns = 2
+
+[node name="LblNombre" type="Label" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 40
+text = "Nombre:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputNombre" type="LineEdit" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.10186779, 0.10186746, 0.101867534, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_s4add")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_abgbn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4add")
+alignment = 1
+max_length = 15
+
+[node name="LblEdad" type="Label" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 40
+text = "Edad:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinEdad" type="SpinBox" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+theme_override_colors/up_icon_modulate = Color(0, 0, 0, 1)
+theme_override_colors/up_hover_icon_modulate = Color(0.20152628, 0.20152661, 0.20152706, 1)
+theme_override_colors/up_pressed_icon_modulate = Color(0, 0, 0, 1)
+theme_override_colors/down_icon_modulate = Color(0, 0, 0, 1)
+theme_override_colors/down_hover_icon_modulate = Color(0.19973147, 0.1997318, 0.19973221, 1)
+theme_override_colors/down_pressed_icon_modulate = Color(0, 0, 0, 1)
+min_value = 15.0
+max_value = 99.0
+value = 20.0
+alignment = 1
+
+[node name="LblSexo" type="Label" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 40
+text = "Sexo:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_abgbn")
+selected = 0
+item_count = 3
+popup/item_0/text = "Sin especificar"
+popup/item_0/id = 0
+popup/item_1/text = "Masculino"
+popup/item_1/id = 1
+popup/item_2/text = "Femenino"
+popup/item_2/id = 2
+
+[node name="LblTienda" type="Label" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 40
+text = "Nombre del Local:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputTienda" type="LineEdit" parent="Panel/VBoxMain/GridCampos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.10186779, 0.10186746, 0.101867534, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_s4add")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_abgbn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4add")
+alignment = 1
+max_length = 15
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxMain"]
+layout_mode = 2
+theme_override_constants/separation = 35
+theme_override_styles/separator = SubResource("StyleBoxLine_s4add")
+
+[node name="SelecAvatar" type="VBoxContainer" parent="Panel/VBoxMain"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LblAvatar" type="Label" parent="Panel/VBoxMain/SelecAvatar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 40
+text = "Selecciona una Foto de Perfil:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxAvatar" type="HBoxContainer" parent="Panel/VBoxMain/SelecAvatar"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="BtnAnterior" type="Button" parent="Panel/VBoxMain/SelecAvatar/HBoxAvatar"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_c06oi")
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 42
+text = "<"
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxMain/SelecAvatar/HBoxAvatar"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_rkfv8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnSig" type="Button" parent="Panel/VBoxMain/SelecAvatar/HBoxAvatar"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_c06oi")
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 42
+text = ">"
+
+[node name="NombreAvatar" type="Label" parent="Panel/VBoxMain/SelecAvatar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 28
+text = "Avatar 1"
+horizontal_alignment = 1
+
+[node name="LblError" type="Label" parent="Panel/VBoxMain"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86691034, 4.0189175e-06, 9.62615e-07, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_s4add")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c06oi")
+text = "Llenar todos los campos!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnRegistrar" type="Button" parent="Panel/VBoxMain"]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_abgbn")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_c06oi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rkfv8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lmytn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ynql8")
+text = "> Registrarse"
+
+[node name="BotonVolver" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0026041667
+anchor_top = 0.9361111
+anchor_right = 0.102604166
+anchor_bottom = 0.9953704
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("7_lmytn")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_ynql8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ngfx4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1ln54")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ddobf")
+text = "< Volver"
+metadata/_edit_use_anchors_ = true

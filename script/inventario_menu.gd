@@ -357,5 +357,6 @@ func _actualizar_label_almacen() -> void:
 		label_almacen.add_theme_color_override("font_color", Color.VIOLET)
 
 func _on_boton_cerrar_pressed() -> void:
+	ConfigUsuario.guardar_partida_en_disco()
 	inventario_cerrado.emit()
 	queue_free()

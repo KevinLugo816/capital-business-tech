@@ -82,9 +82,10 @@ func _actualizar_estado_botones(campana_activa: bool) -> void:
 
 func _validar_boton(btn: Button, id_campana: String, campana_activa: bool) -> void:
 	if is_instance_valid(btn) and catalogo_campanas.has(id_campana):
-		var costo: float = catalogo_campanas[id_campana]["costo"]
+		var costo_base: float = catalogo_campanas[id_campana]["costo"]
+		var costo_inflacionado: float = costo_base * (1.0 + EconomiaGlobal.tasa_inflacion)
 		var reputacion_maxima_alcanzada: bool = EconomiaGlobal.reputacion >= REPUTACION_MAXIMA
-		btn.disabled = campana_activa or reputacion_maxima_alcanzada or (EconomiaGlobal.dinero < costo)
+		btn.disabled = campana_activa or reputacion_maxima_alcanzada or (EconomiaGlobal.dinero < costo_inflacionado)
 
 func _contratar_campana(id_campana: String) -> void:
 	if not catalogo_campanas.has(id_campana):
@@ -95,9 +96,10 @@ func _contratar_campana(id_campana: String) -> void:
 		return
 
 	var datos: Dictionary = catalogo_campanas[id_campana]
-	var costo: float = datos["costo"]
+	var costo_base: float = datos["costo"]
+	var costo_final: float = costo_base * (1.0 + EconomiaGlobal.tasa_inflacion)
 	
-	if EconomiaGlobal.restar_dinero(costo):
+	if EconomiaGlobal.restar_dinero(costo_final):
 		var ganancia_rep: int = int(datos["reputacion"])
 		var nueva_reputacion: int = clampi(EconomiaGlobal.reputacion + ganancia_rep, 0, REPUTACION_MAXIMA)
 		

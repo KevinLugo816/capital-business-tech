@@ -15,6 +15,7 @@ extends Node2D
 @onready var label_estado_local = $UI/LblEstadoLocal
 @onready var boton_monitor = $UI/BotonMonitor
 @onready var boton_inventario = $UI/BotonInventario
+@onready var boton_salir = $UI/BtnVolver
 
 const CLIENTE_ESCENA = preload("res://escena/clientes.tscn")
 const INVENTARIO_MENU_ESCENA = preload("res://escena/inventario_menu.tscn")
@@ -33,6 +34,7 @@ var respuesta_en_proceso: bool = false
 
 func _ready() -> void:
 	menu_recepcion.hide()
+	AudioManager.detener_musica()
 	
 	EconomiaGlobal.dinero_cambiado.connect(_on_dinero_cambiado)
 	EconomiaGlobal.inflacion_cambiada.connect(_on_inflacion_cambiada)
@@ -44,6 +46,7 @@ func _ready() -> void:
 	actualizar_ui()
 	
 	local_abierto = false
+	actualizar_estado_boton_salir()
 	
 	label_estado_local.text = "TIENDA CERRADA (Presiona Abrir Local)"
 	label_estado_local.show()
@@ -56,6 +59,7 @@ func _on_boton_abrir_local_pressed() -> void:
 		return
 		
 	local_abierto = true
+	actualizar_estado_boton_salir()
 	boton_abrir_local.hide()
 	label_estado_local.hide()
 	
@@ -265,6 +269,7 @@ func despachar_cliente() -> void:
 	if clientes_atendidos_hoy == mitad_dia and not receso_realizado:
 		receso_realizado = true
 		local_abierto = false
+		actualizar_estado_boton_salir()
 		print("--- Receso de Mediodía Alcanzado ---")
 		
 		await get_tree().create_timer(1.5).timeout
@@ -278,6 +283,7 @@ func despachar_cliente() -> void:
 	if clientes_atendidos_hoy >= max_clientes_hoy:
 		print("Jornada laboral finalizada.")
 		local_abierto = false
+		actualizar_estado_boton_salir()
 		
 		if is_instance_valid(boton_monitor):
 			boton_monitor.disabled = true
@@ -335,6 +341,14 @@ func _on_boton_inventario_pressed() -> void:
 	var inv_instancia = INVENTARIO_MENU_ESCENA.instantiate()
 	add_child(inv_instancia)
 
+func _on_boton_salir_al_menu_pressed() -> void:
+	ConfigUsuario.guardar_partida_en_disco()
+	get_tree().change_scene_to_file("res://escena/menu_contenido.tscn")
+
+func actualizar_estado_boton_salir() -> void:
+	if is_instance_valid(boton_salir):
+		boton_salir.disabled = local_abierto
+
 func actualizar_ui() -> void:
 	_on_dinero_cambiado(EconomiaGlobal.dinero)
 	_on_inflacion_cambiada(EconomiaGlobal.tasa_inflacion)
@@ -368,6 +382,7 @@ func _on_nuevo_dia_iniciado() -> void:
 			hijo.queue_free()
 
 	EconomiaGlobal.iniciar_nuevo_dia()
+	ConfigUsuario.guardar_partida_en_disco()
 	label_dia.text = "Día: " + str(EconomiaGlobal.dia_actual)
 	clientes_atendidos_hoy = 0
 	receso_realizado = false
@@ -387,6 +402,7 @@ func _on_nuevo_dia_iniciado() -> void:
 		boton_inventario.disabled = false
 	
 	local_abierto = false
+	actualizar_estado_boton_salir()
 	
 	label_estado_local.text = "TIENDA CERRADA"
 	label_estado_local.show()

@@ -19,8 +19,8 @@ var perfil_actual: TipoPerfil = TipoPerfil.NORMAL
 		preload("res://sprite/personajes/cliente_6.png")
 	],
 	TipoPerfil.TACAÑO: [
-		preload("res://sprite/personajes/cliente_1.png"),
-		preload("res://sprite/personajes/cliente_4.png")
+		preload("res://sprite/personajes/cliente_7.png"),
+		preload("res://sprite/personajes/cliente_8.png")
 	],
 	TipoPerfil.EXIGENTE: [
 		preload("res://sprite/personajes/cliente_1.png"),

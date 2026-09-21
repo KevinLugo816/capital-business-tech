@@ -16,6 +16,8 @@ signal monitor_cerrado
 @onready var progress_bar_mini: ProgressBar = $Panel/Control/PanelContainer/Topbar/Alerta/HBoxContainer/Mini
 
 @onready var fondo_rect: TextureRect = $Panel/TextureRect
+@onready var img_avatar: TextureRect = $Panel/Control/PanelContainer/Topbar/PerfilContainer/Avatar
+@onready var lbl_nombre_jugador: Label = $Panel/Control/PanelContainer/Topbar/PerfilContainer/LabelNombre
 
 const FONDOS: Dictionary = {
 	"azul": preload("res://sprite/assets/monitor/fondo_monitor_1.png"),
@@ -72,6 +74,16 @@ func actualizar_escritorio_ui() -> void:
 		
 	if is_instance_valid(lbl_dia_top):
 		lbl_dia_top.text = "Día " + str(EconomiaGlobal.dia_actual)
+
+	if is_instance_valid(lbl_nombre_jugador):
+		var nombre = ConfigUsuario.perfil_jugador.get("nombre_jugador", "Jugador")
+		lbl_nombre_jugador.text = nombre if nombre != "" else "Jugador"
+	
+	if is_instance_valid(img_avatar):
+		var ruta_avatar = ConfigUsuario.perfil_jugador.get("avatar_ruta", "res://sprite/iconos/avatar/avatar_1.png")
+	
+		if ResourceLoader.exists(ruta_avatar):
+			img_avatar.texture = load(ruta_avatar)
 
 func configurar_estilo_barra() -> void:
 	if is_instance_valid(panel_alerta):
@@ -152,7 +164,8 @@ func _on_inflacion_cambiada(_tasa: float) -> void: actualizar_escritorio_ui()
 func _on_nuevo_dia_comenzado() -> void: actualizar_escritorio_ui()
 
 func _on_fondo_cambiado(nombre_color: String) -> void:
-	ConfigUsuario.fondo_monitor = nombre_color
+	if "fondo_monitor" in ConfigUsuario:
+		ConfigUsuario.fondo_monitor = nombre_color
 	_aplicar_fondo(nombre_color)
 
 func _on_btn_app_banco_pressed() -> void: abrir_app_por_nombre("BancoApp", EstadoMonitor.BANCO)
@@ -162,6 +175,8 @@ func _on_btn_app_ajustes_pressed() -> void: abrir_app_por_nombre("AjustesApp", E
 
 func _on_boton_cerrar_pressed() -> void:
 	if estado_actual == EstadoMonitor.HOME:
+		if "ConfigUsuario" in Engine.get_singleton_list() or ConfigUsuario.has_method("guardar_partida_en_disco"):
+			ConfigUsuario.guardar_partida_en_disco()
 		monitor_cerrado.emit()
 		hide()
 	else:

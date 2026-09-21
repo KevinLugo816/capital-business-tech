@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://6rvlernomhpu"]
+[gd_scene load_steps=44 format=3 uid="uid://6rvlernomhpu"]
 
 [ext_resource type="Script" uid="uid://0qtj2frih7mk" path="res://script/monitor_virtual.gd" id="1_5epki"]
 [ext_resource type="Texture2D" uid="uid://byfx153lkvyto" path="res://sprite/assets/monitor.png" id="2_hhjmg"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="11_a8bi5"]
 [ext_resource type="PackedScene" uid="uid://qqeqjach3qdm" path="res://escena/ajustes_app.tscn" id="11_gbdga"]
 [ext_resource type="Texture2D" uid="uid://8d2tm7si8xus" path="res://sprite/iconos/persona.png" id="13_2i7k2"]
+[ext_resource type="Texture2D" uid="uid://cqliytb102aeu" path="res://sprite/iconos/avatar/avatar_3.png" id="13_gv0ca"]
 [ext_resource type="FontFile" uid="uid://c3t87f2g615vn" path="res://sprite/fuentes/LEMONMILK-Regular.otf" id="14_i7u1y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndgsr"]
@@ -196,6 +197,22 @@ offset_bottom = 993.0
 texture = ExtResource("3_ndgsr")
 expand_mode = 1
 
+[node name="Sistema" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.036458332
+anchor_top = 0.8537037
+anchor_right = 0.15364583
+anchor_bottom = 0.91018516
+grow_vertical = 0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_tlwlu")
+theme_override_font_sizes/font_size = 50
+text = "KevOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="Control" type="Control" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
@@ -329,12 +346,23 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 60
 
-[node name="Sistema" type="Label" parent="Panel/Control/PanelContainer/Topbar"]
+[node name="PerfilContainer" type="HBoxContainer" parent="Panel/Control/PanelContainer/Topbar"]
 layout_mode = 2
-theme_override_constants/outline_size = 6
-theme_override_fonts/font = ExtResource("4_tlwlu")
-theme_override_font_sizes/font_size = 50
-text = "KevOS"
+theme_override_constants/separation = 12
+
+[node name="Avatar" type="TextureRect" parent="Panel/Control/PanelContainer/Topbar/PerfilContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture = ExtResource("13_gv0ca")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelNombre" type="Label" parent="Panel/Control/PanelContainer/Topbar/PerfilContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_r211a")
+theme_override_font_sizes/font_size = 54
+text = "Usuario"
 horizontal_alignment = 1
 vertical_alignment = 1
 

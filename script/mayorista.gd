@@ -165,7 +165,8 @@ func _on_imagen_producto_gui_input(event: InputEvent, textura: Texture2D, produc
 
 func _on_cantidad_cambiada(nueva_cantidad: float, precio_unitario: float, lbl_total: Label) -> void:
 	var costo_calculado = precio_unitario * nueva_cantidad
-	lbl_total.text = "Total: $" + str(snapped(costo_calculado, 0.01))
+	if is_instance_valid(lbl_total):
+		lbl_total.text = "Total: $" + str(snapped(costo_calculado, 0.01))
 
 func _on_btn_comprar_pressed(producto: String, precio_unitario: float, selector_cantidad: SpinBox) -> void:
 	var cantidad = int(selector_cantidad.value)

@@ -92,3 +92,11 @@ func _aplicar_efectos_evento(evento: Dictionary) -> void:
 			
 	print("EVENTO ACTIVADO (Día %d): %s" % [EconomiaGlobal.dia_actual, evento.get("titulo", "")])
 	evento_activado.emit(evento.get("titulo", ""), evento.get("descripcion", ""), evento.get("tipo", ""))
+
+func restaurar_evento_cargado() -> void:
+	if not evento_activo.is_empty():
+		evento_activado.emit(
+			evento_activo.get("titulo", ""),
+			evento_activo.get("descripcion", ""),
+			evento_activo.get("tipo", "")
+		)

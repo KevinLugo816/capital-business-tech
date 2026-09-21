@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b0mfmdmtfdbbe"]
+[gd_scene load_steps=45 format=3 uid="uid://b0mfmdmtfdbbe"]
 
 [ext_resource type="Texture2D" uid="uid://bdiuild5wu1wv" path="res://sprite/fondos/fondo_recep.png" id="1_2lou8"]
 [ext_resource type="Script" uid="uid://cm0gq10xko2bp" path="res://script/recepcion.gd" id="1_vmqee"]
@@ -386,6 +386,61 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s66n7"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjw75"]
+content_margin_top = 8.0
+bg_color = Color(0.1488696, 0.5584731, 0.4948184, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5syph"]
+content_margin_top = 8.0
+bg_color = Color(0.11397914, 0.4507776, 0.39949584, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egn5w"]
+content_margin_top = 8.0
+bg_color = Color(0.18309087, 0.66630495, 0.59218794, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vprl"]
+content_margin_top = 8.0
+bg_color = Color(0.14901961, 0.5568628, 0.49411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p7fb"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmcv"]
 content_margin_left = 12.0
 content_margin_top = 8.0
@@ -637,6 +692,30 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_s66n7")
 text = "Abrir Local"
 metadata/_edit_use_anchors_ = true
 
+[node name="BtnVolver" type="Button" parent="UI"]
+custom_minimum_size = Vector2(96, 96)
+anchors_preset = -1
+anchor_left = 0.475
+anchor_top = 0.90833336
+anchor_right = 0.525
+anchor_bottom = 0.99722224
+offset_right = 6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_1g34g")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_xjw75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5syph")
+theme_override_styles/hover = SubResource("StyleBoxFlat_egn5w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6vprl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5p7fb")
+text = "≡"
+metadata/_edit_use_anchors_ = true
+
 [node name="LblEstadoLocal" type="Label" parent="UI"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -664,3 +743,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="UI/BotonMonitor" to="." method="_on_boton_monitor_pressed"]
 [connection signal="pressed" from="UI/BotonInventario" to="." method="_on_boton_inventario_pressed"]
 [connection signal="pressed" from="UI/BtnComenzar" to="." method="_on_boton_abrir_local_pressed"]
+[connection signal="pressed" from="UI/BtnVolver" to="." method="_on_boton_salir_al_menu_pressed"]
