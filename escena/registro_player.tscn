@@ -267,7 +267,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_s4add")
 theme_override_styles/read_only = SubResource("StyleBoxFlat_abgbn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s4add")
 alignment = 1
-max_length = 15
+max_length = 18
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxMain"]
 layout_mode = 2

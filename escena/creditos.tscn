@@ -1,0 +1,174 @@
+[gd_scene load_steps=11 format=3 uid="uid://bl4xpewtejr1q"]
+
+[ext_resource type="FontFile" uid="uid://d1g3voa1c6gdp" path="res://sprite/fuentes/LEMONMILK-Bold.otf" id="1_581qw"]
+[ext_resource type="Script" uid="uid://68vfjwtm12u3" path="res://script/creditos.gd" id="1_oei1r"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="2_kuupy"]
+[ext_resource type="FontFile" uid="uid://6rslwvfssykx" path="res://sprite/fuentes/Neuropol.otf" id="3_oei1r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kuupy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuupy"]
+bg_color = Color(0.7882982, 0.18748894, 0.15643734, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oei1r"]
+bg_color = Color(0.66231436, 0.14483166, 0.119568, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkujl"]
+bg_color = Color(0.92056584, 0.25963643, 0.21751839, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3ggo"]
+bg_color = Color(0.7882353, 0.1882353, 0.15686275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7jg78"]
+
+[node name="Creditos" type="CanvasLayer"]
+script = ExtResource("1_oei1r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6862745)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kuupy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Titulo" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_581qw")
+theme_override_font_sizes/font_size = 42
+text = "CRÉDITOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_kuupy")
+theme_override_fonts/bold_font = ExtResource("1_581qw")
+theme_override_fonts/italics_font = ExtResource("3_oei1r")
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 34
+theme_override_font_sizes/italics_font_size = 32
+bbcode_enabled = true
+text = "[i]Capital Business Tech[/i]
+
+
+[img=64x64]res://sprite/iconos/llave-inglesa.png[/img]
+[b][color=#ff2c2c]Desarrollo & Programación[/color][/b]
+
+Kevin Lugo
+José Fernández
+Henry Padilla
+
+
+[img=64x64]res://sprite/iconos/gestion-de-proyectos.png[/img]
+[b][color=#ffde21]Coordinación[/color][/b]
+
+Ana García
+
+
+[img=64x64]res://sprite/iconos/tutor.png[/img]
+[b][color=#007fff]Tutoría[/color][/b]
+
+Ing. Elías Vargas
+
+
+[img=256x256]res://sprite/logos/logo_uni.png[/img]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gracias" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = -11.5
+offset_right = 70.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_kuupy")
+theme_override_font_sizes/font_size = 44
+text = "¡Gracias por jugar!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnCerrar" type="Button" parent="."]
+custom_minimum_size = Vector2(96, 96)
+anchors_preset = -1
+anchor_left = 0.9458333
+anchor_top = 0.0064814813
+anchor_right = 0.99583334
+anchor_bottom = 0.09537037
+grow_horizontal = 0
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("1_581qw")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_kuupy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oei1r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkujl")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_r3ggo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7jg78")
+text = "X"
+metadata/_edit_use_anchors_ = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dkca8i11ykkhc"]
+[gd_scene load_steps=50 format=3 uid="uid://dkca8i11ykkhc"]
 
 [ext_resource type="Script" uid="uid://bd73hnvont8m7" path="res://script/menu_contenido.gd" id="1_8lqto"]
 [ext_resource type="Texture2D" uid="uid://dgixgiafpwr7v" path="res://sprite/fondos/fondo_tienda.png" id="1_ev7lf"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://do87u0atuuw4r" path="res://sprite/fuentes/control-freak.regular.ttf" id="2_a2kmg"]
 [ext_resource type="FontFile" uid="uid://c3t87f2g615vn" path="res://sprite/fuentes/LEMONMILK-Regular.otf" id="5_nr4fv"]
 [ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="6_3dyew"]
+[ext_resource type="FontFile" uid="uid://d1g3voa1c6gdp" path="res://sprite/fuentes/LEMONMILK-Bold.otf" id="7_rs06e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2kmg"]
 bg_color = Color(0.15599582, 0.7150166, 0.3192995, 1)
@@ -360,6 +361,36 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6gxdt"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3egp"]
+bg_color = Color(0, 0, 0, 0.6862745)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3d08"]
+bg_color = Color(0, 0, 0, 0.76862746)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pt0r7"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvldh"]
+bg_color = Color(0, 0, 0, 0.6862745)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7f5xf"]
+
 [node name="MenuContenido" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -573,3 +604,27 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_05js6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mhvjb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6gxdt")
 text = "Cancelar"
+
+[node name="BtnCreditos" type="Button" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9536458
+anchor_top = 0.0064814813
+anchor_right = 0.9953126
+anchor_bottom = 0.08055556
+grow_horizontal = 0
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("7_rs06e")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_h3egp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n3d08")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pt0r7")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fvldh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7f5xf")
+text = "C"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="BtnCreditos" to="." method="_on_boton_creditos_pressed"]

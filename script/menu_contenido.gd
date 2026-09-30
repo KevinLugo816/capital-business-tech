@@ -13,6 +13,9 @@ extends Control
 @onready var btn_confirmar: Button = $PopupSalir/VBoxContainer/HBoxBotones/BtnConfirmar
 @onready var btn_cancelar: Button = $PopupSalir/VBoxContainer/HBoxBotones/BtnCancelar
 
+const CREDITOS_ESCENA = preload("res://escena/creditos.tscn")
+var creditos_instancia: Node = null
+
 func _ready() -> void:
 	AudioManager.reproducir_musica_menu()
 	
@@ -69,3 +72,10 @@ func _on_btn_opcion_pressed() -> void:
 func _on_btn_tutorial_pressed() -> void:
 	# Pendiente de asignar escena
 	pass
+
+func _on_boton_creditos_pressed() -> void:
+	if is_instance_valid(creditos_instancia):
+		return
+		
+	creditos_instancia = CREDITOS_ESCENA.instantiate()
+	add_child(creditos_instancia)
