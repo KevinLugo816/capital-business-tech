@@ -85,6 +85,7 @@ func _on_btn_registrar_pressed() -> void:
 	EconomiaGlobal.deuda_actual = 0.0
 	EconomiaGlobal.score_crediticio = 30
 	EconomiaGlobal.dias_con_deuda_actual = 0
+	EventosGlobales.limpiar_evento_actual()
 	
 	Inventario.stock = {
 		"Memoria RAM 8GB": 5,

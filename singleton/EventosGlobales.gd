@@ -100,3 +100,6 @@ func restaurar_evento_cargado() -> void:
 			evento_activo.get("descripcion", ""),
 			evento_activo.get("tipo", "")
 		)
+
+func limpiar_evento_actual() -> void:
+	evento_activo.clear()

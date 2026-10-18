@@ -1,0 +1,234 @@
+[gd_scene load_steps=14 format=3 uid="uid://tq6o0giccwn5"]
+
+[ext_resource type="Texture2D" uid="uid://boxu72mjjpypq" path="res://sprite/fondos/fondo_menu.png" id="1_1a00g"]
+[ext_resource type="Script" uid="uid://3jefkrjpjr1l" path="res://script/ayuda.gd" id="1_uotam"]
+[ext_resource type="FontFile" uid="uid://c50awhq4ebgoe" path="res://sprite/fuentes/LEMONMILK-Medium.otf" id="2_om6lr"]
+[ext_resource type="Theme" uid="uid://bk0b7a5hrocx0" path="res://tema/tema_uno.tres" id="2_xiebs"]
+[ext_resource type="FontFile" uid="uid://c3t87f2g615vn" path="res://sprite/fuentes/LEMONMILK-Regular.otf" id="4_yyicd"]
+[ext_resource type="FontFile" uid="uid://cmq5vbfeu6jg0" path="res://sprite/fuentes/HWYGOTH.TTF" id="5_pql3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1a00g"]
+content_margin_left = 50.0
+content_margin_top = 50.0
+content_margin_right = 50.0
+content_margin_bottom = 50.0
+bg_color = Color(0, 0, 0, 0.5803922)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xiebs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pql3r"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.5803922)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uotam"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.7921569)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gxq3"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.58431375)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75k0k"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.31764707, 0.31764707, 0.31764707, 0.9137255)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wae62"]
+
+[node name="Ayuda" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uotam")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1a00g")
+
+[node name="PanelContenido" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1a00g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContenido"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="MenuNav" type="VBoxContainer" parent="PanelContenido/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="BtnRecepcion" type="Button" parent="PanelContenido/HBoxContainer/MenuNav"]
+custom_minimum_size = Vector2(750, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_xiebs")
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_om6lr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xiebs")
+text = "1. Recepción y Jornada"
+
+[node name="BtnInventario" type="Button" parent="PanelContenido/HBoxContainer/MenuNav"]
+custom_minimum_size = Vector2(750, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_xiebs")
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_om6lr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xiebs")
+text = "2. Inventario y Precios"
+
+[node name="BtnMonitor" type="Button" parent="PanelContenido/HBoxContainer/MenuNav"]
+custom_minimum_size = Vector2(750, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_xiebs")
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_om6lr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xiebs")
+text = "3. Monitor Virtual"
+
+[node name="BtnClientes" type="Button" parent="PanelContenido/HBoxContainer/MenuNav"]
+custom_minimum_size = Vector2(750, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_xiebs")
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_om6lr")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xiebs")
+text = "4. Clientes y Negociación"
+
+[node name="Diapositiva" type="VBoxContainer" parent="PanelContenido/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="LblTituloSeccion" type="Label" parent="PanelContenido/HBoxContainer/Diapositiva"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_yyicd")
+theme_override_font_sizes/font_size = 38
+text = "Titulo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ImagenDiapositiva" type="TextureRect" parent="PanelContenido/HBoxContainer/Diapositiva"]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+
+[node name="TextInfo" type="RichTextLabel" parent="PanelContenido/HBoxContainer/Diapositiva"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("5_pql3r")
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_pql3r")
+bbcode_enabled = true
+text = "Información"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxNav" type="HBoxContainer" parent="PanelContenido/HBoxContainer/Diapositiva"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="BtnAnterior" type="Button" parent="PanelContenido/HBoxContainer/Diapositiva/HBoxNav"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_xiebs")
+theme_override_fonts/font = ExtResource("5_pql3r")
+theme_override_font_sizes/font_size = 42
+text = "<"
+
+[node name="LblPagina" type="Label" parent="PanelContenido/HBoxContainer/Diapositiva/HBoxNav"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_pql3r")
+theme_override_font_sizes/font_size = 32
+text = "Página X / X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnSig" type="Button" parent="PanelContenido/HBoxContainer/Diapositiva/HBoxNav"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_xiebs")
+theme_override_fonts/font = ExtResource("5_pql3r")
+theme_override_font_sizes/font_size = 42
+text = ">"
+
+[node name="BotonVolver" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0026041667
+anchor_top = 0.9361111
+anchor_right = 0.102604166
+anchor_bottom = 0.9953704
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_yyicd")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_uotam")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3gxq3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_75k0k")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wae62")
+text = "< Volver"
+metadata/_edit_use_anchors_ = true

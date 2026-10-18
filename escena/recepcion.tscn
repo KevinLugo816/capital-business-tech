@@ -428,7 +428,7 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vprl"]
 content_margin_top = 8.0
-bg_color = Color(0.14901961, 0.5568628, 0.49411765, 1)
+bg_color = Color(0.46780586, 0.49148047, 0.4817921, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -692,7 +692,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_s66n7")
 text = "Abrir Local"
 metadata/_edit_use_anchors_ = true
 
-[node name="BtnVolver" type="Button" parent="UI"]
+[node name="BtnPausa" type="Button" parent="UI"]
 custom_minimum_size = Vector2(96, 96)
 anchors_preset = -1
 anchor_left = 0.475
@@ -743,4 +743,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="UI/BotonMonitor" to="." method="_on_boton_monitor_pressed"]
 [connection signal="pressed" from="UI/BotonInventario" to="." method="_on_boton_inventario_pressed"]
 [connection signal="pressed" from="UI/BtnComenzar" to="." method="_on_boton_abrir_local_pressed"]
-[connection signal="pressed" from="UI/BtnVolver" to="." method="_on_boton_salir_al_menu_pressed"]
+[connection signal="pressed" from="UI/BtnPausa" to="." method="_on_boton_salir_al_menu_pressed"]

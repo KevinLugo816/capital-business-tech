@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dkca8i11ykkhc"]
+[gd_scene load_steps=55 format=3 uid="uid://dkca8i11ykkhc"]
 
 [ext_resource type="Script" uid="uid://bd73hnvont8m7" path="res://script/menu_contenido.gd" id="1_8lqto"]
 [ext_resource type="Texture2D" uid="uid://dgixgiafpwr7v" path="res://sprite/fondos/fondo_tienda.png" id="1_ev7lf"]
@@ -361,6 +361,58 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6gxdt"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7f5xf"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.18227252, 0.40954483, 0.9999998, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.006841786, 1.4246702e-05, 0.87100035, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iq6vk"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.7921569)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs712"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.58431375)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0rx7"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.31764707, 0.31764707, 0.31764707, 0.9137255)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxd4s"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3egp"]
 bg_color = Color(0, 0, 0, 0.6862745)
 corner_radius_top_left = 12
@@ -515,7 +567,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_3dyew")
 text = "Opciones"
 metadata/_edit_use_anchors_ = true
 
-[node name="BtnTutorial" type="Button" parent="."]
+[node name="BtnAyuda" type="Button" parent="."]
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 0
 anchor_left = 0.553125
@@ -530,7 +582,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_8ljtk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rjnfv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5rceb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rs06e")
-text = "Tutorial"
+text = "Ayuda"
 metadata/_edit_use_anchors_ = true
 
 [node name="BotonVolver" type="Button" parent="."]
@@ -604,6 +656,64 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_05js6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mhvjb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6gxdt")
 text = "Cancelar"
+
+[node name="PopupOpciones" type="PopupPanel" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(500, 273)
+theme_override_styles/panel = SubResource("StyleBoxFlat_7f5xf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupOpciones"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 488.0
+offset_bottom = 261.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="PopupOpciones/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_3dyew")
+theme_override_font_sizes/font_size = 36
+text = "Volumen Música"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SliderMusica" type="HSlider" parent="PopupOpciones/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+tick_count = 5
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="Label2" type="Label" parent="PopupOpciones/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_3dyew")
+theme_override_font_sizes/font_size = 36
+text = "Volumen Efectos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SliderSFX" type="HSlider" parent="PopupOpciones/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+tick_count = 5
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="BtnCerrarOpciones" type="Button" parent="PopupOpciones/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_3dyew")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_iq6vk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rs712")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o0rx7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pxd4s")
+text = "Cerrar"
 
 [node name="BtnCreditos" type="Button" parent="."]
 custom_minimum_size = Vector2(80, 80)

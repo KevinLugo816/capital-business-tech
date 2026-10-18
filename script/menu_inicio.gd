@@ -1,5 +1,7 @@
 extends Control
 
+@onready var logo: TextureRect = $Logo
+@onready var vbox_container: VBoxContainer = $VBoxContainer
 @onready var popup_opciones: PopupPanel = $PopupOpciones
 @onready var slider_musica: HSlider = $PopupOpciones/VBoxContainer/SliderMusica
 @onready var slider_sfx: HSlider = $PopupOpciones/VBoxContainer/SliderSFX
@@ -12,6 +14,9 @@ func _ready() -> void:
 	AudioManager.reproducir_musica_menu()
 	slider_musica.value = ConfigUsuario.volumen_musica
 	slider_sfx.value = ConfigUsuario.volumen_sfx
+	
+	AnimUiManager.animar_entrada_ui(vbox_container)
+	AnimUiManager.animar_nodo_flotante(logo)
 
 func _on_btn_nueva_partida_pressed() -> void:
 	for slot in range(1, 4):
@@ -35,9 +40,11 @@ func _on_btn_cerrar_opciones_pressed() -> void:
 
 func _on_slider_musica_value_changed(value: float) -> void:
 	AudioManager.aplicar_volumen_musica(value)
+	ConfigUsuario.volumen_musica = value
 
 func _on_slider_sfx_value_changed(value: float) -> void:
 	AudioManager.aplicar_volumen_sfx(value)
+	ConfigUsuario.volumen_sfx = value
 
 func _on_boton_creditos_pressed() -> void:
 	if is_instance_valid(creditos_instancia):
@@ -48,3 +55,6 @@ func _on_boton_creditos_pressed() -> void:
 
 func _on_btn_salir_pressed() -> void:
 	get_tree().quit()
+
+func _exit_tree() -> void:
+	AnimUiManager.detener_flotacion(logo)

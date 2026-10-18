@@ -81,6 +81,7 @@ func guardar_partida_en_disco(num_slot: int = slot_actual) -> void:
 			"dinero": EconomiaGlobal.dinero,
 			"reputacion": EconomiaGlobal.reputacion,
 			"tasa_inflacion": EconomiaGlobal.tasa_inflacion,
+			"historial_inflacion": EconomiaGlobal.historial_inflacion.duplicate(),
 			"deuda_actual": EconomiaGlobal.deuda_actual,
 			"score_crediticio": EconomiaGlobal.score_crediticio,
 			"dias_con_deuda_actual": EconomiaGlobal.dias_con_deuda_actual,
@@ -140,6 +141,13 @@ func cargar_partida_desde_disco(num_slot: int) -> bool:
 		EconomiaGlobal.reputacion = datos["progreso"].get("reputacion", 50)
 		
 		EconomiaGlobal.tasa_inflacion = datos["progreso"].get("tasa_inflacion", 0.05)
+		
+		if datos["progreso"].has("historial_inflacion"):
+			var array_cargado = datos["progreso"]["historial_inflacion"]
+			EconomiaGlobal.historial_inflacion.clear()
+			for val in array_cargado:
+				EconomiaGlobal.historial_inflacion.append(float(val))
+		
 		EconomiaGlobal.deuda_actual = datos["progreso"].get("deuda_actual", 0.0)
 		EconomiaGlobal.dias_con_deuda_actual = datos["progreso"].get("dias_con_deuda_actual", 0)
 		var credit_score = datos["progreso"].get("score_crediticio", 30)
@@ -148,9 +156,11 @@ func cargar_partida_desde_disco(num_slot: int) -> bool:
 		EconomiaGlobal.multiplicador_servicios_evento = datos["progreso"].get("multiplicador_servicios_evento", 1.0)
 		EconomiaGlobal.inflacion_extra_evento = datos["progreso"].get("inflacion_extra_evento", 0.0)
 		
-		if datos["progreso"].has("evento_activo"):
+		if datos["progreso"].has("evento_activo") and not datos["progreso"]["evento_activo"].is_empty():
 			EventosGlobales.evento_activo = datos["progreso"]["evento_activo"].duplicate()
 			EventosGlobales.restaurar_evento_cargado()
+		else:
+			EventosGlobales.limpiar_evento_actual()
 
 	# 5. Inventario
 	if datos.has("inventario"):
